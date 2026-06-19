@@ -698,6 +698,24 @@ function App() {
             </section>
           )}
 
+          {commandText && (
+            <section className="command-panel command-panel--featured" ref={commandRef}>
+              <div className="section-heading">
+                <span>Operational command</span>
+                <button
+                  className="copy-command"
+                  onClick={() => navigator.clipboard?.writeText(commandText)}
+                  type="button"
+                >
+                  Copy order
+                </button>
+              </div>
+              <div className="command-body">
+                <ReactMarkdown>{commandText}</ReactMarkdown>
+              </div>
+            </section>
+          )}
+
           {spatialResult && (
             <section className="intel-panel">
               <div className="section-heading">
@@ -803,22 +821,6 @@ function App() {
               </div>
             ))}
           </section>
-
-          {commandText && (
-            <section className="command-panel" ref={commandRef}>
-              <div className="section-heading">
-                <span>Operational command</span>
-                <button
-                  className="copy-command"
-                  onClick={() => navigator.clipboard?.writeText(commandText)}
-                  type="button"
-                >
-                  Copy order
-                </button>
-              </div>
-              <ReactMarkdown>{commandText}</ReactMarkdown>
-            </section>
-          )}
         </aside>
       </main>
     </div>
