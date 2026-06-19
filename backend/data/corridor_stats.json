@@ -1,0 +1,265 @@
+{
+  "Tumkur Road": {
+    "event_count": 458,
+    "avg_severity": 6.2,
+    "median_clearance_mins": 37.8,
+    "top_causes": {
+      "vehicle_breakdown": 383,
+      "others": 33,
+      "accident": 16,
+      "water_logging": 9,
+      "tree_fall": 9
+    }
+  },
+  "ORR East 1": {
+    "event_count": 244,
+    "avg_severity": 6.5,
+    "median_clearance_mins": 52.7,
+    "top_causes": {
+      "vehicle_breakdown": 154,
+      "pot_holes": 26,
+      "water_logging": 22,
+      "construction": 17,
+      "others": 11
+    }
+  },
+  "CBD 2": {
+    "event_count": 103,
+    "avg_severity": 6.5,
+    "median_clearance_mins": 72.2,
+    "top_causes": {
+      "vehicle_breakdown": 51,
+      "others": 13,
+      "pot_holes": 10,
+      "water_logging": 9,
+      "road_conditions": 7
+    }
+  },
+  "ORR East 2": {
+    "event_count": 187,
+    "avg_severity": 6.8,
+    "median_clearance_mins": 42.2,
+    "top_causes": {
+      "construction": 102,
+      "vehicle_breakdown": 56,
+      "water_logging": 14,
+      "others": 10,
+      "accident": 2
+    }
+  },
+  "ORR West 1": {
+    "event_count": 168,
+    "avg_severity": 6.4,
+    "median_clearance_mins": 62.2,
+    "top_causes": {
+      "vehicle_breakdown": 105,
+      "water_logging": 15,
+      "road_conditions": 9,
+      "others": 9,
+      "construction": 7
+    }
+  },
+  "ORR North 1": {
+    "event_count": 275,
+    "avg_severity": 6.7,
+    "median_clearance_mins": 52.4,
+    "top_causes": {
+      "vehicle_breakdown": 153,
+      "construction": 38,
+      "others": 24,
+      "accident": 19,
+      "congestion": 12
+    }
+  },
+  "Old Madras Road": {
+    "event_count": 263,
+    "avg_severity": 6.4,
+    "median_clearance_mins": 41.5,
+    "top_causes": {
+      "vehicle_breakdown": 184,
+      "pot_holes": 23,
+      "water_logging": 15,
+      "others": 13,
+      "construction": 11
+    }
+  },
+  "Bellary Road 2": {
+    "event_count": 379,
+    "avg_severity": 6.5,
+    "median_clearance_mins": 59.4,
+    "top_causes": {
+      "vehicle_breakdown": 269,
+      "accident": 42,
+      "others": 23,
+      "construction": 18,
+      "water_logging": 13
+    }
+  },
+  "Bellary Road 1": {
+    "event_count": 610,
+    "avg_severity": 6.4,
+    "median_clearance_mins": 51.0,
+    "top_causes": {
+      "vehicle_breakdown": 449,
+      "others": 53,
+      "accident": 20,
+      "water_logging": 20,
+      "tree_fall": 18
+    }
+  },
+  "Hosur Road": {
+    "event_count": 298,
+    "avg_severity": 6.5,
+    "median_clearance_mins": 59.6,
+    "top_causes": {
+      "vehicle_breakdown": 170,
+      "pot_holes": 60,
+      "others": 19,
+      "water_logging": 18,
+      "accident": 18
+    }
+  },
+  "NULL": {
+    "event_count": 20,
+    "avg_severity": 5.5,
+    "median_clearance_mins": 2.0,
+    "top_causes": {
+      "pot_holes": 17,
+      "vehicle_breakdown": 1,
+      "water_logging": 1,
+      "congestion": 1
+    }
+  },
+  "Bannerghata Road": {
+    "event_count": 209,
+    "avg_severity": 6.6,
+    "median_clearance_mins": 48.7,
+    "top_causes": {
+      "vehicle_breakdown": 93,
+      "pot_holes": 45,
+      "water_logging": 35,
+      "road_conditions": 13,
+      "others": 7
+    }
+  },
+  "ORR North 2": {
+    "event_count": 235,
+    "avg_severity": 6.4,
+    "median_clearance_mins": 50.8,
+    "top_causes": {
+      "vehicle_breakdown": 147,
+      "congestion": 40,
+      "others": 21,
+      "construction": 14,
+      "water_logging": 7
+    }
+  },
+  "Magadi Road": {
+    "event_count": 245,
+    "avg_severity": 6.2,
+    "median_clearance_mins": 60.1,
+    "top_causes": {
+      "vehicle_breakdown": 171,
+      "others": 27,
+      "pot_holes": 13,
+      "procession": 10,
+      "road_conditions": 9
+    }
+  },
+  "IRR(Thanisandra road)": {
+    "event_count": 95,
+    "avg_severity": 6.5,
+    "median_clearance_mins": 51.2,
+    "top_causes": {
+      "pot_holes": 37,
+      "vehicle_breakdown": 24,
+      "water_logging": 11,
+      "construction": 7,
+      "others": 5
+    }
+  },
+  "Mysore Road": {
+    "event_count": 743,
+    "avg_severity": 6.5,
+    "median_clearance_mins": 44.1,
+    "top_causes": {
+      "vehicle_breakdown": 565,
+      "others": 62,
+      "water_logging": 41,
+      "accident": 15,
+      "construction": 14
+    }
+  },
+  "West of Chord Road": {
+    "event_count": 174,
+    "avg_severity": 6.4,
+    "median_clearance_mins": 43.6,
+    "top_causes": {
+      "vehicle_breakdown": 105,
+      "others": 19,
+      "pot_holes": 16,
+      "tree_fall": 11,
+      "water_logging": 9
+    }
+  },
+  "CBD 1": {
+    "event_count": 26,
+    "avg_severity": 6.5,
+    "median_clearance_mins": 45.1,
+    "top_causes": {
+      "pot_holes": 10,
+      "vehicle_breakdown": 9,
+      "others": 3,
+      "water_logging": 2,
+      "construction": 1
+    }
+  },
+  "Old Airport Road": {
+    "event_count": 76,
+    "avg_severity": 6.6,
+    "median_clearance_mins": 69.3,
+    "top_causes": {
+      "vehicle_breakdown": 40,
+      "others": 10,
+      "public_event": 6,
+      "water_logging": 5,
+      "accident": 3
+    }
+  },
+  "Hennur Main Road": {
+    "event_count": 96,
+    "avg_severity": 6.8,
+    "median_clearance_mins": 97.2,
+    "top_causes": {
+      "vehicle_breakdown": 34,
+      "congestion": 22,
+      "others": 14,
+      "construction": 9,
+      "water_logging": 4
+    }
+  },
+  "Airport New South Road": {
+    "event_count": 67,
+    "avg_severity": 6.8,
+    "median_clearance_mins": 68.8,
+    "top_causes": {
+      "vehicle_breakdown": 31,
+      "construction": 22,
+      "tree_fall": 3,
+      "road_conditions": 3,
+      "others": 3
+    }
+  },
+  "Varthur Road": {
+    "event_count": 77,
+    "avg_severity": 6.5,
+    "median_clearance_mins": 54.5,
+    "top_causes": {
+      "vehicle_breakdown": 53,
+      "construction": 9,
+      "water_logging": 7,
+      "pot_holes": 6,
+      "others": 1
+    }
+  }
+}
