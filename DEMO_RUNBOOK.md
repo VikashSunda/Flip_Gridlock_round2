@@ -2,18 +2,29 @@
 
 ## Run Locally
 
+One-time setup (regenerates data + new forecast priors):
+
+```bash
+cd backend
+pip install -r requirements.txt
+python preprocess.py
+```
+
 Backend:
 
 ```bash
-.venv/bin/python backend/main.py
+python backend/main.py            # http://localhost:8000
 ```
 
 Frontend:
 
 ```bash
 cd frontend
-npm run dev
+npm install
+npm run dev                        # http://localhost:5173
 ```
+
+The header has two modes: **Live incident** (reactive) and **Event forecast** (proactive, Theme 2).
 
 If port 8000 is occupied, run the backend on another port and point Vite at it:
 
@@ -31,6 +42,25 @@ VITE_API_BASE=http://localhost:8001 npm run dev
 5. Show confidence: spatial evidence, historical evidence, action evidence.
 6. Show counterfactual: without intervention vs with deployment.
 7. End with the operational command: "This tells officers where to deploy, where to hold, where to divert, and how much time is saved."
+
+## Event Forecast Flow (Theme 2 — the headline)
+
+1. Switch to **Event forecast** in the header.
+2. Pick a real planned event from the preset dropdown — the form auto-fills.
+3. Click **Run forecast**. Show, before the event happens:
+   - **Predicted clearance band** (median + range + confidence — honest about variance).
+   - **Manpower** with a transparent breakdown (severity, closure, corridor load, peak hour…).
+   - **Barricade points** and **diversion routes** (labelled approximate — incident-graph routing).
+   - **Counterfactual** + the data-grounded (confounded) road-closure contrast.
+   - **Predicted-vs-actual** when the preset is unedited (credibility).
+4. After the event, enter the **actual clearance** in "Post-event learning" → closes the loop (the system tracks prediction error).
+
+## Credibility artifacts (have these ready for SME judges)
+
+- `python backend/eval/validate_data.py` — proves the data caveats (planned clearance n≈28; end_datetime is a permit window; concurrency).
+- `python backend/eval/eval_duration.py` — temporal train/test split; baselines the model must beat; per-cause MAE.
+- `python backend/test_forecast.py` — lambda sensitivity (blast radius vs decay).
+- `POST /allocate` — splits a finite officer budget across concurrent events (over-subscription handling).
 
 ## Judge Hooks
 

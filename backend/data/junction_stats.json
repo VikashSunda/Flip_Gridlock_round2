@@ -1,0 +1,2673 @@
+{
+  "UrvashiJunction": {
+    "event_count": 6,
+    "avg_clearance_mins": 37.4,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 1,
+      "Debris": 1
+    },
+    "corridor": null
+  },
+  "LalbaghMainGateJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 64.9,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "QueensStatueCircle": {
+    "event_count": 9,
+    "avg_clearance_mins": 2386.9,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "public_event": 2,
+      "accident": 1
+    },
+    "corridor": "Old Madras Road"
+  },
+  "MysoreRd-RingRdJunc(Nayandanahallii)": {
+    "event_count": 19,
+    "avg_clearance_mins": 570.9,
+    "top_causes": {
+      "vehicle_breakdown": 16,
+      "road_conditions": 2,
+      "others": 1
+    },
+    "corridor": "ORR West 1"
+  },
+  "HebbalFlyoverJunc": {
+    "event_count": 28,
+    "avg_clearance_mins": 1090.0,
+    "top_causes": {
+      "vehicle_breakdown": 13,
+      "road_conditions": 6,
+      "construction": 6
+    },
+    "corridor": "Bellary Road 1"
+  },
+  "28thMainJayanagarJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "pot_holes": 6
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "Peenya14thCrossJunc": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "SilkBoardJunc": {
+    "event_count": 33,
+    "avg_clearance_mins": 76.2,
+    "top_causes": {
+      "vehicle_breakdown": 20,
+      "pot_holes": 5,
+      "construction": 4
+    },
+    "corridor": "ORR East 1"
+  },
+  "RingRoad-UllalJunction": {
+    "event_count": 7,
+    "avg_clearance_mins": 138.6,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "others": 2
+    },
+    "corridor": null
+  },
+  "BhadrappaLayout": {
+    "event_count": 2,
+    "avg_clearance_mins": 52.3,
+    "top_causes": {
+      "others": 1,
+      "accident": 1
+    },
+    "corridor": "ORR North 2"
+  },
+  "IbblurJunction'": {
+    "event_count": 13,
+    "avg_clearance_mins": 2297.1,
+    "top_causes": {
+      "accident": 5,
+      "vehicle_breakdown": 4,
+      "water_logging": 2
+    },
+    "corridor": "ORR East 1"
+  },
+  "Sumanhalli": {
+    "event_count": 16,
+    "avg_clearance_mins": 65.8,
+    "top_causes": {
+      "vehicle_breakdown": 13,
+      "others": 2,
+      "road_conditions": 1
+    },
+    "corridor": "Magadi Road"
+  },
+  "BucheryJunction": {
+    "event_count": 11,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "pot_holes": 4,
+      "vehicle_breakdown": 3,
+      "congestion": 1
+    },
+    "corridor": null
+  },
+  "PotteryCircle": {
+    "event_count": 5,
+    "avg_clearance_mins": 59.5,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "pot_holes": 1
+    },
+    "corridor": null
+  },
+  "VeerannapalyaJunction(BEL,HO)": {
+    "event_count": 30,
+    "avg_clearance_mins": 2754.5,
+    "top_causes": {
+      "construction": 13,
+      "vehicle_breakdown": 6,
+      "accident": 5
+    },
+    "corridor": "ORR North 1"
+  },
+  "JP Nagar 15th cross junction": {
+    "event_count": 7,
+    "avg_clearance_mins": 53.3,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "pot_holes": 2,
+      "water_logging": 1
+    },
+    "corridor": "ORR West 1"
+  },
+  "TrinityCircle": {
+    "event_count": 11,
+    "avg_clearance_mins": 53.3,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "pot_holes": 4
+    },
+    "corridor": "Old Madras Road"
+  },
+  "CID-CarltonHouseJunc": {
+    "event_count": 9,
+    "avg_clearance_mins": 76.5,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "others": 1,
+      "congestion": 1
+    },
+    "corridor": null
+  },
+  "CoffeeBoardJunc": {
+    "event_count": 8,
+    "avg_clearance_mins": 110.5,
+    "top_causes": {
+      "water_logging": 3,
+      "vehicle_breakdown": 3,
+      "others": 2
+    },
+    "corridor": "CBD 2"
+  },
+  "PoliceTimmaiahCircle(GPO)": {
+    "event_count": 14,
+    "avg_clearance_mins": 70.1,
+    "top_causes": {
+      "vehicle_breakdown": 8,
+      "others": 5,
+      "accident": 1
+    },
+    "corridor": "CBD 2"
+  },
+  "Delmia-Jayanagar": {
+    "event_count": 3,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "pot_holes": 1,
+      "vehicle_breakdown": 1,
+      "construction": 1
+    },
+    "corridor": "ORR West 1"
+  },
+  "SirsiCircle": {
+    "event_count": 9,
+    "avg_clearance_mins": 31.1,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "others": 2
+    },
+    "corridor": "Mysore Road"
+  },
+  "K R Circle": {
+    "event_count": 31,
+    "avg_clearance_mins": 595.4,
+    "top_causes": {
+      "vehicle_breakdown": 17,
+      "others": 6,
+      "water_logging": 4
+    },
+    "corridor": null
+  },
+  "CMP GateJunc": {
+    "event_count": 20,
+    "avg_clearance_mins": 1109.0,
+    "top_causes": {
+      "pot_holes": 8,
+      "vehicle_breakdown": 8,
+      "water_logging": 2
+    },
+    "corridor": "Hosur Road"
+  },
+  "YelhankaCircle": {
+    "event_count": 34,
+    "avg_clearance_mins": 70.3,
+    "top_causes": {
+      "vehicle_breakdown": 21,
+      "water_logging": 5,
+      "accident": 3
+    },
+    "corridor": "Bellary Road 2"
+  },
+  "SubedarChatramRd near SheshadripuramPS": {
+    "event_count": 8,
+    "avg_clearance_mins": 3008.2,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "others": 2,
+      "construction": 2
+    },
+    "corridor": null
+  },
+  "ModiBridgeJunction": {
+    "event_count": 3,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "water_logging": 2,
+      "pot_holes": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "KrishnaFlourMill": {
+    "event_count": 19,
+    "avg_clearance_mins": 25.5,
+    "top_causes": {
+      "vehicle_breakdown": 16,
+      "construction": 2,
+      "public_event": 1
+    },
+    "corridor": null
+  },
+  "Richmond circle jn": {
+    "event_count": 11,
+    "avg_clearance_mins": 36.0,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "tree_fall": 1,
+      "protest": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "WilsonGarden10thCrossJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 51.8,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "pot_holes": 1,
+      "accident": 1
+    },
+    "corridor": null
+  },
+  "MICO Bande": {
+    "event_count": 6,
+    "avg_clearance_mins": 34.4,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "water_logging": 1
+    },
+    "corridor": null
+  },
+  "MekhriCircle": {
+    "event_count": 64,
+    "avg_clearance_mins": 78.2,
+    "top_causes": {
+      "vehicle_breakdown": 55,
+      "others": 5,
+      "road_conditions": 3
+    },
+    "corridor": "Bellary Road 1"
+  },
+  "Bamboobazar(Shivajinagar)": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "water_logging": 2
+    },
+    "corridor": null
+  },
+  "HainsJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 60.3,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "pot_holes": 1
+    },
+    "corridor": null
+  },
+  "BagalakunteCrossJunction": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "water_logging": 1,
+      "pot_holes": 1
+    },
+    "corridor": null
+  },
+  "KatriguppeJunction": {
+    "event_count": 12,
+    "avg_clearance_mins": 42.8,
+    "top_causes": {
+      "vehicle_breakdown": 8,
+      "construction": 3,
+      "others": 1
+    },
+    "corridor": "ORR West 1"
+  },
+  "SindhiColonyJunction": {
+    "event_count": 9,
+    "avg_clearance_mins": 58.1,
+    "top_causes": {
+      "pot_holes": 5,
+      "vehicle_breakdown": 3,
+      "road_conditions": 1
+    },
+    "corridor": null
+  },
+  "SantheCircle": {
+    "event_count": 25,
+    "avg_clearance_mins": 110.7,
+    "top_causes": {
+      "vehicle_breakdown": 17,
+      "construction": 6,
+      "others": 1
+    },
+    "corridor": "Bellary Road 2"
+  },
+  "BangaloreBodyBuildersJunc": {
+    "event_count": 19,
+    "avg_clearance_mins": 29.2,
+    "top_causes": {
+      "vehicle_breakdown": 17,
+      "others": 1,
+      "pot_holes": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "NavarangBarJunc-Dr RajkumarRd": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "others": 1,
+      "construction": 1
+    },
+    "corridor": null
+  },
+  "LeprosyhospitalJunc": {
+    "event_count": 21,
+    "avg_clearance_mins": 50.6,
+    "top_causes": {
+      "vehicle_breakdown": 15,
+      "procession": 4,
+      "others": 2
+    },
+    "corridor": "Magadi Road"
+  },
+  "HulimaveRd-BanneraghattaRdJunc": {
+    "event_count": 9,
+    "avg_clearance_mins": 50.3,
+    "top_causes": {
+      "pot_holes": 5,
+      "vehicle_breakdown": 3,
+      "water_logging": 1
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "ArakereGateJunc": {
+    "event_count": 15,
+    "avg_clearance_mins": 95.4,
+    "top_causes": {
+      "pot_holes": 4,
+      "vehicle_breakdown": 4,
+      "others": 3
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "Trilight Circle,Race course Road": {
+    "event_count": 2,
+    "avg_clearance_mins": 63.4,
+    "top_causes": {
+      "construction": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "SubbannaJunction": {
+    "event_count": 9,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "construction": 4,
+      "pot_holes": 2,
+      "vehicle_breakdown": 2
+    },
+    "corridor": null
+  },
+  "AyyappaTempleJunc": {
+    "event_count": 49,
+    "avg_clearance_mins": 55.9,
+    "top_causes": {
+      "pot_holes": 37,
+      "vehicle_breakdown": 11,
+      "others": 1
+    },
+    "corridor": "Hosur Road"
+  },
+  "AnepalyaJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 86.5,
+    "top_causes": {
+      "others": 2,
+      "vehicle_breakdown": 2,
+      "public_event": 1
+    },
+    "corridor": "Hosur Road"
+  },
+  "MintoJunction": {
+    "event_count": 5,
+    "avg_clearance_mins": 53.3,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "Debris": 1
+    },
+    "corridor": null
+  },
+  "VishweswaraiahJunctio(Uttamsagar)": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "construction": 1
+    },
+    "corridor": null
+  },
+  "NGV RearGateJunc": {
+    "event_count": 2,
+    "avg_clearance_mins": 81.0,
+    "top_causes": {
+      "others": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "VeerasandraGateJunction": {
+    "event_count": 11,
+    "avg_clearance_mins": 74.8,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "accident": 2
+    },
+    "corridor": null
+  },
+  "PriyadarshiniHotel,Jayamahal,RT Nagar": {
+    "event_count": 6,
+    "avg_clearance_mins": 4163.1,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "congestion": 1,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "BigBazaar(Whitefield)Junc": {
+    "event_count": 8,
+    "avg_clearance_mins": 26.4,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "KR Road-14thCross Junc": {
+    "event_count": 1,
+    "avg_clearance_mins": 123.5,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "PurnimaTheaterJunc": {
+    "event_count": 8,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "public_event": 1
+    },
+    "corridor": null
+  },
+  "IndianExpressJunction": {
+    "event_count": 15,
+    "avg_clearance_mins": 1209.1,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "road_conditions": 1,
+      "pot_holes": 1
+    },
+    "corridor": "CBD 2"
+  },
+  "HennurRoad-ORR Junc": {
+    "event_count": 17,
+    "avg_clearance_mins": 70.9,
+    "top_causes": {
+      "vehicle_breakdown": 16,
+      "road_conditions": 1
+    },
+    "corridor": "Airport New South Road"
+  },
+  "YeshwanthpuraCircle": {
+    "event_count": 38,
+    "avg_clearance_mins": 315.4,
+    "top_causes": {
+      "vehicle_breakdown": 33,
+      "others": 2,
+      "water_logging": 1
+    },
+    "corridor": "Tumkur Road"
+  },
+  "KhodaysCircle(DV UrsCircle)": {
+    "event_count": 23,
+    "avg_clearance_mins": 55.8,
+    "top_causes": {
+      "vehicle_breakdown": 18,
+      "others": 4,
+      "pot_holes": 1
+    },
+    "corridor": null
+  },
+  "MahalaxmiLayoutEntranceJunc": {
+    "event_count": 5,
+    "avg_clearance_mins": 2499.5,
+    "top_causes": {
+      "road_conditions": 2,
+      "vehicle_breakdown": 2,
+      "others": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "JayadevaHospitalJunc": {
+    "event_count": 8,
+    "avg_clearance_mins": 59.8,
+    "top_causes": {
+      "vehicle_breakdown": 8
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "GokuldasImagesJunc": {
+    "event_count": 28,
+    "avg_clearance_mins": 44.5,
+    "top_causes": {
+      "vehicle_breakdown": 27,
+      "accident": 1
+    },
+    "corridor": "Tumkur Road"
+  },
+  "BigBazaarJunction(OldMadrasRd)": {
+    "event_count": 26,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 22,
+      "tree_fall": 1,
+      "pot_holes": 1
+    },
+    "corridor": "Old Madras Road"
+  },
+  "KalyanNagar-ORR Junc": {
+    "event_count": 6,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "congestion": 1
+    },
+    "corridor": "ORR North 1"
+  },
+  "Minerva Circle": {
+    "event_count": 2,
+    "avg_clearance_mins": 9.1,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": null
+  },
+  "ModiHospital": {
+    "event_count": 1,
+    "avg_clearance_mins": 81.2,
+    "top_causes": {
+      "others": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "Batrayanapura(Amrutahalli)Junction": {
+    "event_count": 14,
+    "avg_clearance_mins": 89.1,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "accident": 2,
+      "procession": 1
+    },
+    "corridor": "Bellary Road 2"
+  },
+  "Dr RajkumarRd-10thCrossRdJunc": {
+    "event_count": 5,
+    "avg_clearance_mins": 133.8,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "tree_fall": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "D'SouzaCircle": {
+    "event_count": 4,
+    "avg_clearance_mins": 142.2,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "others": 1,
+      "construction": 1
+    },
+    "corridor": null
+  },
+  "BloodBankCircle": {
+    "event_count": 15,
+    "avg_clearance_mins": 28.1,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "road_conditions": 5,
+      "accident": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "KoramangalaWaterTankJunc": {
+    "event_count": 29,
+    "avg_clearance_mins": 136.7,
+    "top_causes": {
+      "pot_holes": 18,
+      "vehicle_breakdown": 6,
+      "road_conditions": 3
+    },
+    "corridor": "IRR(Thanisandra road)"
+  },
+  "TataInstituteCircle": {
+    "event_count": 12,
+    "avg_clearance_mins": 39.5,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "others": 3
+    },
+    "corridor": "Tumkur Road"
+  },
+  "TownhallJunction": {
+    "event_count": 30,
+    "avg_clearance_mins": 989.7,
+    "top_causes": {
+      "vehicle_breakdown": 29,
+      "others": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "BMTCJunction-K H Road": {
+    "event_count": 10,
+    "avg_clearance_mins": 72.2,
+    "top_causes": {
+      "vehicle_breakdown": 10
+    },
+    "corridor": null
+  },
+  "Shivashankara circle": {
+    "event_count": 5,
+    "avg_clearance_mins": 91.5,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "PES-DevegowdaCircle": {
+    "event_count": 4,
+    "avg_clearance_mins": 51.1,
+    "top_causes": {
+      "vehicle_breakdown": 4
+    },
+    "corridor": "ORR West 1"
+  },
+  "HesaraghattaJunction": {
+    "event_count": 30,
+    "avg_clearance_mins": 35.0,
+    "top_causes": {
+      "vehicle_breakdown": 27,
+      "others": 2,
+      "accident": 1
+    },
+    "corridor": "Tumkur Road"
+  },
+  "toll gate mysore road": {
+    "event_count": 33,
+    "avg_clearance_mins": 372.4,
+    "top_causes": {
+      "vehicle_breakdown": 26,
+      "others": 6,
+      "accident": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "ISRO Junction-Airport rd": {
+    "event_count": 9,
+    "avg_clearance_mins": 4275.2,
+    "top_causes": {
+      "vehicle_breakdown": 6,
+      "others": 3
+    },
+    "corridor": "Old Airport Road"
+  },
+  "WilsonGarden12thCrossJunc": {
+    "event_count": 8,
+    "avg_clearance_mins": 28.7,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "SatteliteBusStandJunc": {
+    "event_count": 43,
+    "avg_clearance_mins": 664.3,
+    "top_causes": {
+      "vehicle_breakdown": 40,
+      "others": 3
+    },
+    "corridor": "Mysore Road"
+  },
+  "PeenyaPoliceStation": {
+    "event_count": 12,
+    "avg_clearance_mins": 549.2,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "accident": 1,
+      "others": 1
+    },
+    "corridor": "Tumkur Road"
+  },
+  "Chokasandra (Tumkur road)": {
+    "event_count": 14,
+    "avg_clearance_mins": 2776.2,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "others": 2,
+      "accident": 1
+    },
+    "corridor": "Tumkur Road"
+  },
+  "27th Cross Jayanagar(Ganapathi Temple)": {
+    "event_count": 1,
+    "avg_clearance_mins": 119.3,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "Malleswaram18thCrossRd-SampigeRdJunc": {
+    "event_count": 5,
+    "avg_clearance_mins": 51.8,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "accident": 1
+    },
+    "corridor": null
+  },
+  "Arbindo Circle": {
+    "event_count": 10,
+    "avg_clearance_mins": 687.3,
+    "top_causes": {
+      "vehicle_breakdown": 6,
+      "congestion": 2,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "NaganathapuraJunction": {
+    "event_count": 12,
+    "avg_clearance_mins": 149.3,
+    "top_causes": {
+      "vehicle_breakdown": 11,
+      "others": 1
+    },
+    "corridor": "Hosur Road"
+  },
+  "CommandoHospitalJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 33.2,
+    "top_causes": {
+      "vehicle_breakdown": 6
+    },
+    "corridor": null
+  },
+  "PoliceCornerJunc": {
+    "event_count": 26,
+    "avg_clearance_mins": 29.8,
+    "top_causes": {
+      "vehicle_breakdown": 24,
+      "construction": 1,
+      "protest": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "FTI Junction(KanteeravaStudio)": {
+    "event_count": 11,
+    "avg_clearance_mins": 671.8,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "pot_holes": 3,
+      "public_event": 1
+    },
+    "corridor": null
+  },
+  "WebbsCircle": {
+    "event_count": 3,
+    "avg_clearance_mins": 149.9,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "construction": 1
+    },
+    "corridor": "Old Madras Road"
+  },
+  "BilekahalliJunc": {
+    "event_count": 14,
+    "avg_clearance_mins": 1192.4,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "pot_holes": 1,
+      "road_conditions": 1
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "Bommanahalli": {
+    "event_count": 26,
+    "avg_clearance_mins": 19.8,
+    "top_causes": {
+      "vehicle_breakdown": 16,
+      "pot_holes": 6,
+      "accident": 1
+    },
+    "corridor": "Hosur Road"
+  },
+  "Ashoknagar Junction(ShoolayCircle)": {
+    "event_count": 6,
+    "avg_clearance_mins": 71.1,
+    "top_causes": {
+      "vehicle_breakdown": 6
+    },
+    "corridor": "Mysore Road"
+  },
+  "Srigandakaval": {
+    "event_count": 14,
+    "avg_clearance_mins": 87.4,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "others": 2,
+      "water_logging": 1
+    },
+    "corridor": "Magadi Road"
+  },
+  "BanashankariBusStandJunc": {
+    "event_count": 13,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "public_event": 2,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "MargosaRd-18thCrossJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 58.0,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "road_conditions": 3
+    },
+    "corridor": null
+  },
+  "UlsoorGateJunc": {
+    "event_count": 12,
+    "avg_clearance_mins": 41.6,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "accident": 1,
+      "construction": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "SRS Peenya Junc": {
+    "event_count": 20,
+    "avg_clearance_mins": 25.6,
+    "top_causes": {
+      "vehicle_breakdown": 15,
+      "accident": 3,
+      "others": 2
+    },
+    "corridor": "Tumkur Road"
+  },
+  "BHEL Gate": {
+    "event_count": 1,
+    "avg_clearance_mins": 31.1,
+    "top_causes": {
+      "others": 1
+    },
+    "corridor": null
+  },
+  "Kammanahalli-RingRoadJunction": {
+    "event_count": 4,
+    "avg_clearance_mins": 55.8,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "others": 1
+    },
+    "corridor": "ORR North 1"
+  },
+  "StateBankofMysoreJunc": {
+    "event_count": 12,
+    "avg_clearance_mins": 54.1,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "pot_holes": 1,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "MeenakshiMallJunc": {
+    "event_count": 8,
+    "avg_clearance_mins": 70.0,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "pot_holes": 1
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "KanakapuraRd-RingRdJunction": {
+    "event_count": 9,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 8,
+      "public_event": 1
+    },
+    "corridor": "ORR West 1"
+  },
+  "JakkurCrossJunction": {
+    "event_count": 18,
+    "avg_clearance_mins": 25.1,
+    "top_causes": {
+      "vehicle_breakdown": 12,
+      "accident": 5,
+      "construction": 1
+    },
+    "corridor": "Bellary Road 2"
+  },
+  "NandiCross(RaniCross)": {
+    "event_count": 3,
+    "avg_clearance_mins": 80.8,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": null
+  },
+  "PlatformRdJunction": {
+    "event_count": 6,
+    "avg_clearance_mins": 469.4,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "construction": 1
+    },
+    "corridor": null
+  },
+  "Marigowda-TavarkereRdJunc": {
+    "event_count": 13,
+    "avg_clearance_mins": 349.4,
+    "top_causes": {
+      "vehicle_breakdown": 6,
+      "procession": 2,
+      "public_event": 2
+    },
+    "corridor": "Hosur Road"
+  },
+  "Devasandra(k r puram)": {
+    "event_count": 30,
+    "avg_clearance_mins": 1353.0,
+    "top_causes": {
+      "vehicle_breakdown": 22,
+      "others": 4,
+      "water_logging": 4
+    },
+    "corridor": null
+  },
+  "BagalurCrossJunc": {
+    "event_count": 27,
+    "avg_clearance_mins": 776.6,
+    "top_causes": {
+      "vehicle_breakdown": 18,
+      "others": 6,
+      "construction": 2
+    },
+    "corridor": "Bellary Road 2"
+  },
+  "OldMadrasRd-SuddaguntepalyaRdJunc": {
+    "event_count": 3,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "accident": 1
+    },
+    "corridor": "Old Madras Road"
+  },
+  "ShantalaJunction": {
+    "event_count": 15,
+    "avg_clearance_mins": 1530.6,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "accident": 4,
+      "others": 2
+    },
+    "corridor": null
+  },
+  "OldMadrasRd-NGEF Junc": {
+    "event_count": 8,
+    "avg_clearance_mins": 37.8,
+    "top_causes": {
+      "vehicle_breakdown": 8
+    },
+    "corridor": "Old Madras Road"
+  },
+  "Deverabeesanahalli-ORR Junc": {
+    "event_count": 15,
+    "avg_clearance_mins": 35.6,
+    "top_causes": {
+      "vehicle_breakdown": 13,
+      "tree_fall": 1,
+      "construction": 1
+    },
+    "corridor": "ORR East 1"
+  },
+  "JalahalliCross(SM Circle)": {
+    "event_count": 32,
+    "avg_clearance_mins": 38.0,
+    "top_causes": {
+      "vehicle_breakdown": 29,
+      "accident": 2,
+      "others": 1
+    },
+    "corridor": "Tumkur Road"
+  },
+  "SagarTheatreJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 40.8,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 1,
+      "pot_holes": 1
+    },
+    "corridor": null
+  },
+  "HunsemarammanahalliJunction": {
+    "event_count": 7,
+    "avg_clearance_mins": 68.2,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "accident": 2,
+      "public_event": 1
+    },
+    "corridor": "Bellary Road 2"
+  },
+  "KundanahalliGateJunc": {
+    "event_count": 11,
+    "avg_clearance_mins": 60.6,
+    "top_causes": {
+      "vehicle_breakdown": 8,
+      "construction": 2,
+      "pot_holes": 1
+    },
+    "corridor": "Varthur Road"
+  },
+  "SiddalingaiahCircle": {
+    "event_count": 11,
+    "avg_clearance_mins": 28.0,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "others": 1,
+      "procession": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "HopefarmJunction": {
+    "event_count": 10,
+    "avg_clearance_mins": 907.5,
+    "top_causes": {
+      "vehicle_breakdown": 8,
+      "road_conditions": 1,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "RRR(Okalipuram)Junction": {
+    "event_count": 6,
+    "avg_clearance_mins": 44.4,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 1,
+      "accident": 1
+    },
+    "corridor": null
+  },
+  "ElectronicCityGate-2Junc": {
+    "event_count": 6,
+    "avg_clearance_mins": 50.4,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "accident": 1
+    },
+    "corridor": null
+  },
+  "Shivajinagar(BRV)Junction": {
+    "event_count": 16,
+    "avg_clearance_mins": 53.2,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "others": 3,
+      "water_logging": 2
+    },
+    "corridor": "Old Madras Road"
+  },
+  "5thMainHSR": {
+    "event_count": 3,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "others": 1,
+      "construction": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": "ORR East 1"
+  },
+  "K H Road-SiddaiahRdJunc(BMTC-BigBazaar)": {
+    "event_count": 6,
+    "avg_clearance_mins": 95.9,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "construction": 1,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "MaratahalliBridgeJunc": {
+    "event_count": 16,
+    "avg_clearance_mins": 1515.7,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "construction": 2,
+      "pot_holes": 2
+    },
+    "corridor": "Varthur Road"
+  },
+  "GowdanapalyaJunction": {
+    "event_count": 1,
+    "avg_clearance_mins": 19.0,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "TyagiHengalvarayaJunc(DickensonRd)": {
+    "event_count": 5,
+    "avg_clearance_mins": 55.2,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "others": 2,
+      "pot_holes": 1
+    },
+    "corridor": "CBD 1"
+  },
+  "EliteJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 57.5,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "others": 3
+    },
+    "corridor": null
+  },
+  "Jaipuria-Adugodi": {
+    "event_count": 4,
+    "avg_clearance_mins": 21.3,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "others": 1
+    },
+    "corridor": "IRR(Thanisandra road)"
+  },
+  "OldPoliceStation-Ashoknagar": {
+    "event_count": 5,
+    "avg_clearance_mins": 69.1,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "accident": 1,
+      "others": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "Nagavara-ORR Junction": {
+    "event_count": 32,
+    "avg_clearance_mins": 1352.7,
+    "top_causes": {
+      "vehicle_breakdown": 16,
+      "others": 8,
+      "construction": 5
+    },
+    "corridor": "Hennur Main Road"
+  },
+  "MS RamaiahJunc(TollGate)": {
+    "event_count": 11,
+    "avg_clearance_mins": 497.4,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "pot_holes": 1,
+      "construction": 1
+    },
+    "corridor": "Tumkur Road"
+  },
+  "LinkRoadMalleswaramJunc": {
+    "event_count": 3,
+    "avg_clearance_mins": 31.1,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": null
+  },
+  "YelhankaBypass": {
+    "event_count": 19,
+    "avg_clearance_mins": 61.0,
+    "top_causes": {
+      "vehicle_breakdown": 15,
+      "accident": 3,
+      "construction": 1
+    },
+    "corridor": "Bellary Road 2"
+  },
+  "TamarikannanJunc": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "Old Madras Road"
+  },
+  "Basveshwarnagar 8th main Junction": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "accident": 1
+    },
+    "corridor": null
+  },
+  "GarebhavipalyaJunc": {
+    "event_count": 5,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "accident": 3,
+      "vehicle_breakdown": 2
+    },
+    "corridor": "Hosur Road"
+  },
+  "A S CharStreet-MysoreRdJunc": {
+    "event_count": 5,
+    "avg_clearance_mins": 31.4,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "others": 1,
+      "accident": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "Dr TCM RoyanRd near AmbedkarStatue": {
+    "event_count": 12,
+    "avg_clearance_mins": 483.6,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "congestion": 2,
+      "accident": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "MC Circle": {
+    "event_count": 6,
+    "avg_clearance_mins": 25.0,
+    "top_causes": {
+      "vehicle_breakdown": 6
+    },
+    "corridor": "West of Chord Road"
+  },
+  "South end circle": {
+    "event_count": 3,
+    "avg_clearance_mins": 18.2,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "accident": 1
+    },
+    "corridor": null
+  },
+  "HalliThindi": {
+    "event_count": 3,
+    "avg_clearance_mins": 88.3,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": null
+  },
+  "BinnyMillJunction": {
+    "event_count": 7,
+    "avg_clearance_mins": 48.0,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "pot_holes": 1,
+      "public_event": 1
+    },
+    "corridor": null
+  },
+  "SandeepUnnikrishnan-Yelhanka": {
+    "event_count": 8,
+    "avg_clearance_mins": 1068.7,
+    "top_causes": {
+      "vehicle_breakdown": 6,
+      "accident": 1,
+      "tree_fall": 1
+    },
+    "corridor": null
+  },
+  "29thMainRdBTM LayoutJunc": {
+    "event_count": 5,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "pot_holes": 2,
+      "water_logging": 1
+    },
+    "corridor": null
+  },
+  "KogilluCrossJunc": {
+    "event_count": 15,
+    "avg_clearance_mins": 540.3,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "accident": 2,
+      "water_logging": 2
+    },
+    "corridor": "Bellary Road 2"
+  },
+  "DomlurWaterTank": {
+    "event_count": 12,
+    "avg_clearance_mins": 149.1,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "others": 1,
+      "public_event": 1
+    },
+    "corridor": "Old Airport Road"
+  },
+  "ShivandaCircle": {
+    "event_count": 12,
+    "avg_clearance_mins": 49.6,
+    "top_causes": {
+      "vehicle_breakdown": 12
+    },
+    "corridor": null
+  },
+  "DoddaballapuraCrossJunc": {
+    "event_count": 3,
+    "avg_clearance_mins": 4305.1,
+    "top_causes": {
+      "others": 1,
+      "vehicle_breakdown": 1,
+      "construction": 1
+    },
+    "corridor": null
+  },
+  "KuvempuCircle": {
+    "event_count": 3,
+    "avg_clearance_mins": 1673.7,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "others": 1
+    },
+    "corridor": "ORR North 2"
+  },
+  "KamrajRdJunction": {
+    "event_count": 5,
+    "avg_clearance_mins": 108.5,
+    "top_causes": {
+      "others": 3,
+      "vehicle_breakdown": 2
+    },
+    "corridor": "Old Madras Road"
+  },
+  "MayohallJunction": {
+    "event_count": 5,
+    "avg_clearance_mins": 43.6,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "others": 2,
+      "construction": 1
+    },
+    "corridor": "Old Madras Road"
+  },
+  "ShankarMuttCircle": {
+    "event_count": 3,
+    "avg_clearance_mins": 39.0,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "KuvempuCircleJunc,HAL MainGate": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "Old Airport Road"
+  },
+  "RajeshwariJunc": {
+    "event_count": 22,
+    "avg_clearance_mins": 75.7,
+    "top_causes": {
+      "vehicle_breakdown": 19,
+      "others": 2,
+      "accident": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "OldMadrasRd-Indranagar100ftRdJunc": {
+    "event_count": 12,
+    "avg_clearance_mins": 29.0,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "pot_holes": 3,
+      "accident": 2
+    },
+    "corridor": "Old Madras Road"
+  },
+  "DevanahalliCrossJunc": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": null
+  },
+  "BTM16thMain-ORR Junc": {
+    "event_count": 6,
+    "avg_clearance_mins": 23.9,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "construction": 2,
+      "tree_fall": 1
+    },
+    "corridor": null
+  },
+  "RajajinagarEntranceJunction": {
+    "event_count": 5,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "others": 1,
+      "water_logging": 1
+    },
+    "corridor": null
+  },
+  "MillCornerRd-SampigeRdJunc": {
+    "event_count": 9,
+    "avg_clearance_mins": 99.0,
+    "top_causes": {
+      "vehicle_breakdown": 9
+    },
+    "corridor": null
+  },
+  "SarjapurRd-St JohnsRdJunc": {
+    "event_count": 10,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "pot_holes": 7,
+      "vehicle_breakdown": 3
+    },
+    "corridor": "Hosur Road"
+  },
+  "HudsonCircle": {
+    "event_count": 16,
+    "avg_clearance_mins": 98.9,
+    "top_causes": {
+      "vehicle_breakdown": 11,
+      "accident": 1,
+      "procession": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "ChaudrayaCircle/UdayaTVCircle(CantonmentJunc)": {
+    "event_count": 7,
+    "avg_clearance_mins": 75.7,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 2,
+      "pot_holes": 1
+    },
+    "corridor": null
+  },
+  "Yemalur cross junc": {
+    "event_count": 4,
+    "avg_clearance_mins": 1549.6,
+    "top_causes": {
+      "others": 2,
+      "pot_holes": 1,
+      "protest": 1
+    },
+    "corridor": "Old Airport Road"
+  },
+  "MinskSquare(CTO Junction)": {
+    "event_count": 8,
+    "avg_clearance_mins": 245.9,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "road_conditions": 2,
+      "pot_holes": 1
+    },
+    "corridor": "CBD 2"
+  },
+  "Kadubeesanahalli-ORR Junc": {
+    "event_count": 12,
+    "avg_clearance_mins": 512.3,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "water_logging": 2
+    },
+    "corridor": "ORR East 1"
+  },
+  "KarnatakaBhavanJunction": {
+    "event_count": 9,
+    "avg_clearance_mins": 35.9,
+    "top_causes": {
+      "vehicle_breakdown": 6,
+      "public_event": 1,
+      "accident": 1
+    },
+    "corridor": null
+  },
+  "SadashivnagarJunc": {
+    "event_count": 13,
+    "avg_clearance_mins": 154.6,
+    "top_causes": {
+      "vehicle_breakdown": 10,
+      "accident": 1,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "HoramavuJunction": {
+    "event_count": 12,
+    "avg_clearance_mins": 206.5,
+    "top_causes": {
+      "construction": 5,
+      "vehicle_breakdown": 4,
+      "others": 2
+    },
+    "corridor": "ORR North 1"
+  },
+  "Bellandur Junction, Outer ring road": {
+    "event_count": 3,
+    "avg_clearance_mins": 23.4,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "construction": 1
+    },
+    "corridor": "ORR East 1"
+  },
+  "KensingtonOvalJunc": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "LowerAgaram(IndiaGarage)Junc": {
+    "event_count": 3,
+    "avg_clearance_mins": 21.9,
+    "top_causes": {
+      "accident": 1,
+      "vehicle_breakdown": 1,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "ShivajiTalkiesJunc": {
+    "event_count": 7,
+    "avg_clearance_mins": 44.0,
+    "top_causes": {
+      "vehicle_breakdown": 6,
+      "construction": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "LRDE Junction": {
+    "event_count": 9,
+    "avg_clearance_mins": 63.3,
+    "top_causes": {
+      "vehicle_breakdown": 8,
+      "others": 1
+    },
+    "corridor": "Bellary Road 1"
+  },
+  "BEL Circle": {
+    "event_count": 25,
+    "avg_clearance_mins": 1108.9,
+    "top_causes": {
+      "vehicle_breakdown": 16,
+      "others": 4,
+      "construction": 3
+    },
+    "corridor": "ORR North 2"
+  },
+  "OldMadrasRd-DoubleRdJunc": {
+    "event_count": 3,
+    "avg_clearance_mins": 11.4,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": "Old Madras Road"
+  },
+  "ChandraLayoutJunc-nearWaterTank": {
+    "event_count": 2,
+    "avg_clearance_mins": 106.8,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": "Bellary Road 1"
+  },
+  "Nagarbhavi": {
+    "event_count": 9,
+    "avg_clearance_mins": 256.7,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "others": 3,
+      "accident": 1
+    },
+    "corridor": null
+  },
+  "Indiranasgar13thMainJunc": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "construction": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": "IRR(Thanisandra road)"
+  },
+  "AshirwadamCircle": {
+    "event_count": 5,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "Kudlu Gate Junc": {
+    "event_count": 6,
+    "avg_clearance_mins": 84.8,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 2
+    },
+    "corridor": "Hosur Road"
+  },
+  "KIMCO Junction": {
+    "event_count": 31,
+    "avg_clearance_mins": 476.0,
+    "top_causes": {
+      "vehicle_breakdown": 22,
+      "others": 6,
+      "congestion": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "N R SquareJunc": {
+    "event_count": 10,
+    "avg_clearance_mins": 50.1,
+    "top_causes": {
+      "vehicle_breakdown": 10
+    },
+    "corridor": "Mysore Road"
+  },
+  "GoruguntepalyaJunc": {
+    "event_count": 20,
+    "avg_clearance_mins": 51.4,
+    "top_causes": {
+      "vehicle_breakdown": 19,
+      "accident": 1
+    },
+    "corridor": "Tumkur Road"
+  },
+  "UCO Bank(Forum)": {
+    "event_count": 2,
+    "avg_clearance_mins": 117.2,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": "Hosur Road"
+  },
+  "JohnsonMarket": {
+    "event_count": 3,
+    "avg_clearance_mins": 70.4,
+    "top_causes": {
+      "vehicle_breakdown": 1,
+      "others": 1,
+      "pot_holes": 1
+    },
+    "corridor": "Hosur Road"
+  },
+  "DhobiGhatJunc": {
+    "event_count": 7,
+    "avg_clearance_mins": 61.7,
+    "top_causes": {
+      "vehicle_breakdown": 7
+    },
+    "corridor": "West of Chord Road"
+  },
+  "AnilKumbleCircle": {
+    "event_count": 8,
+    "avg_clearance_mins": 76.6,
+    "top_causes": {
+      "vehicle_breakdown": 7,
+      "construction": 1
+    },
+    "corridor": "Old Madras Road"
+  },
+  "RamamurthyNagarJunction": {
+    "event_count": 9,
+    "avg_clearance_mins": 108.2,
+    "top_causes": {
+      "vehicle_breakdown": 6,
+      "accident": 1,
+      "others": 1
+    },
+    "corridor": "ORR North 1"
+  },
+  "AttiguppeCircleJunction": {
+    "event_count": 1,
+    "avg_clearance_mins": 13.0,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "NIMHANS Junction": {
+    "event_count": 6,
+    "avg_clearance_mins": 74.3,
+    "top_causes": {
+      "vehicle_breakdown": 6
+    },
+    "corridor": null
+  },
+  "VetenaryHospitalJunc-Shivajinagar": {
+    "event_count": 4,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "pot_holes": 1
+    },
+    "corridor": null
+  },
+  "MotherTeressaCircle": {
+    "event_count": 11,
+    "avg_clearance_mins": 39.3,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "accident": 1,
+      "protest": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "TumkurRdMarappanapalyaJunc": {
+    "event_count": 14,
+    "avg_clearance_mins": 47.7,
+    "top_causes": {
+      "vehicle_breakdown": 14
+    },
+    "corridor": "Tumkur Road"
+  },
+  "Ring road-Near Kengunte Junction": {
+    "event_count": 7,
+    "avg_clearance_mins": 97.1,
+    "top_causes": {
+      "vehicle_breakdown": 7
+    },
+    "corridor": null
+  },
+  "AgaraJunction": {
+    "event_count": 6,
+    "avg_clearance_mins": 315.3,
+    "top_causes": {
+      "others": 3,
+      "vehicle_breakdown": 2,
+      "accident": 1
+    },
+    "corridor": "ORR East 1"
+  },
+  "OldMadrasRd-80FeetRdJunc": {
+    "event_count": 8,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 8
+    },
+    "corridor": "Old Madras Road"
+  },
+  "Srinivagilu(Ejipura)Junc": {
+    "event_count": 4,
+    "avg_clearance_mins": 17.0,
+    "top_causes": {
+      "water_logging": 2,
+      "construction": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": "IRR(Thanisandra road)"
+  },
+  "AdugodiJunc": {
+    "event_count": 2,
+    "avg_clearance_mins": 16.7,
+    "top_causes": {
+      "road_conditions": 1,
+      "accident": 1
+    },
+    "corridor": "Hosur Road"
+  },
+  "BEML GateJunc(SuranjandasRd)": {
+    "event_count": 2,
+    "avg_clearance_mins": 2.7,
+    "top_causes": {
+      "vehicle_breakdown": 1,
+      "procession": 1
+    },
+    "corridor": null
+  },
+  "GorappanapalyaJunction": {
+    "event_count": 1,
+    "avg_clearance_mins": 11.8,
+    "top_causes": {
+      "construction": 1
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "NavarangTheatreJunction": {
+    "event_count": 4,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "construction": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "UttarahalliJunction": {
+    "event_count": 15,
+    "avg_clearance_mins": 1360.6,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "road_conditions": 5,
+      "pot_holes": 4
+    },
+    "corridor": null
+  },
+  "SadahalliGateJunc(AirportRd)": {
+    "event_count": 7,
+    "avg_clearance_mins": 116.5,
+    "top_causes": {
+      "public_event": 4,
+      "vehicle_breakdown": 2,
+      "construction": 1
+    },
+    "corridor": "Bellary Road 2"
+  },
+  "HSR14thMainJunc": {
+    "event_count": 3,
+    "avg_clearance_mins": 60.4,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": "ORR East 1"
+  },
+  "Fire Force Junction": {
+    "event_count": 2,
+    "avg_clearance_mins": 18.6,
+    "top_causes": {
+      "vehicle_breakdown": 1,
+      "pot_holes": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "KodigehalliCross": {
+    "event_count": 11,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 9,
+      "construction": 1,
+      "accident": 1
+    },
+    "corridor": "Bellary Road 1"
+  },
+  "ItmaduJunction": {
+    "event_count": 6,
+    "avg_clearance_mins": 63.6,
+    "top_causes": {
+      "vehicle_breakdown": 6
+    },
+    "corridor": "ORR West 1"
+  },
+  "BegumMahalJunc": {
+    "event_count": 4,
+    "avg_clearance_mins": 827.2,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "tree_fall": 1
+    },
+    "corridor": "Old Madras Road"
+  },
+  "HoodiJunction": {
+    "event_count": 6,
+    "avg_clearance_mins": 53.4,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "road_conditions": 2,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "ShivanahalliJunctionWOC": {
+    "event_count": 3,
+    "avg_clearance_mins": 116.1,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "others": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "NCERT Junction": {
+    "event_count": 1,
+    "avg_clearance_mins": 146.2,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "ORR West 1"
+  },
+  "KadirenahalliJunction": {
+    "event_count": 8,
+    "avg_clearance_mins": 75.2,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "Debris": 3
+    },
+    "corridor": "ORR West 1"
+  },
+  "Krupanidhi College": {
+    "event_count": 5,
+    "avg_clearance_mins": 88.1,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "pot_holes": 2
+    },
+    "corridor": null
+  },
+  "PrasannaJunction": {
+    "event_count": 6,
+    "avg_clearance_mins": 48.1,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 2
+    },
+    "corridor": "Magadi Road"
+  },
+  "TC Palya-OM RoadJunc": {
+    "event_count": 4,
+    "avg_clearance_mins": 84.8,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "TVS CrossJunction": {
+    "event_count": 1,
+    "avg_clearance_mins": 74.8,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "NTTF JunctionPeenya": {
+    "event_count": 2,
+    "avg_clearance_mins": 81.3,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": null
+  },
+  "Peenya2ndStageBusStand": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "construction": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "Narayanapura cross, Hegde nagar": {
+    "event_count": 3,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "accident": 1
+    },
+    "corridor": "Hennur Main Road"
+  },
+  "Jayanagar 4th main,36th cross": {
+    "event_count": 2,
+    "avg_clearance_mins": 152.8,
+    "top_causes": {
+      "vehicle_breakdown": 1,
+      "others": 1
+    },
+    "corridor": null
+  },
+  "OperaHouseJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 1411.0,
+    "top_causes": {
+      "vehicle_breakdown": 3,
+      "others": 2,
+      "pot_holes": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "UniversityJunc(Janabharti)": {
+    "event_count": 11,
+    "avg_clearance_mins": 18.9,
+    "top_causes": {
+      "vehicle_breakdown": 8,
+      "construction": 3
+    },
+    "corridor": "Mysore Road"
+  },
+  "JaiMuniRaoCircle": {
+    "event_count": 5,
+    "avg_clearance_mins": 100.3,
+    "top_causes": {
+      "construction": 2,
+      "others": 2,
+      "vehicle_breakdown": 1
+    },
+    "corridor": "Magadi Road"
+  },
+  "RamaiahCircle-UlsoorPoliceStation": {
+    "event_count": 9,
+    "avg_clearance_mins": 49.8,
+    "top_causes": {
+      "vehicle_breakdown": 9
+    },
+    "corridor": "Old Madras Road"
+  },
+  "SonyworldJunction": {
+    "event_count": 3,
+    "avg_clearance_mins": 41.9,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": "IRR(Thanisandra road)"
+  },
+  "SwagathMainRd-EastEndRdJunc": {
+    "event_count": 2,
+    "avg_clearance_mins": 31.1,
+    "top_causes": {
+      "tree_fall": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "BhashyamCircle-SadashivNagar": {
+    "event_count": 4,
+    "avg_clearance_mins": 26.5,
+    "top_causes": {
+      "vehicle_breakdown": 4
+    },
+    "corridor": null
+  },
+  "CashPharmacyJunction": {
+    "event_count": 3,
+    "avg_clearance_mins": 50.4,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": "Mysore Road"
+  },
+  "BiryandCircle": {
+    "event_count": 5,
+    "avg_clearance_mins": 22.3,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "Rajajinagagr1stBlockJunction": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": "West of Chord Road"
+  },
+  "ASC Junction": {
+    "event_count": 3,
+    "avg_clearance_mins": 78.2,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": null
+  },
+  "DevegowdaPetrolBunkJunc": {
+    "event_count": 2,
+    "avg_clearance_mins": 92.3,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": "ORR West 1"
+  },
+  "GopalGowdaJUnc": {
+    "event_count": 3,
+    "avg_clearance_mins": 64.0,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": null
+  },
+  "GovindapuraCross": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "MysoreRd--MadhuPetrolBunkJunction": {
+    "event_count": 4,
+    "avg_clearance_mins": 28.5,
+    "top_causes": {
+      "others": 3,
+      "vehicle_breakdown": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "DairyCircle": {
+    "event_count": 5,
+    "avg_clearance_mins": 47.5,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "others": 1
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "Rajajinagar19thMainJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 6
+    },
+    "corridor": "West of Chord Road"
+  },
+  "HennurRd-DavisRdJunction": {
+    "event_count": 5,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "construction": 3,
+      "procession": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": "Airport New South Road"
+  },
+  "SiddapuraJunction": {
+    "event_count": 5,
+    "avg_clearance_mins": 125.8,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "tree_fall": 1
+    },
+    "corridor": null
+  },
+  "K R MarketJunction": {
+    "event_count": 7,
+    "avg_clearance_mins": 111.2,
+    "top_causes": {
+      "vehicle_breakdown": 5,
+      "construction": 1,
+      "others": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "KonanakunteJunction(KanakapurarRd)": {
+    "event_count": 6,
+    "avg_clearance_mins": 61.6,
+    "top_causes": {
+      "vehicle_breakdown": 6
+    },
+    "corridor": null
+  },
+  "RoyanCircle-Chamrajpete": {
+    "event_count": 1,
+    "avg_clearance_mins": 11.7,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "AnjaneyaTempleJunc": {
+    "event_count": 3,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": "Old Madras Road"
+  },
+  "BasavamantapaJunc-Dr RajkumarRd": {
+    "event_count": 2,
+    "avg_clearance_mins": 16.8,
+    "top_causes": {
+      "vehicle_breakdown": 1,
+      "tree_fall": 1
+    },
+    "corridor": null
+  },
+  "Basappa Circle Junction": {
+    "event_count": 3,
+    "avg_clearance_mins": 60.7,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": null
+  },
+  "ChandrikaJunction": {
+    "event_count": 2,
+    "avg_clearance_mins": 45.0,
+    "top_causes": {
+      "vehicle_breakdown": 1,
+      "tree_fall": 1
+    },
+    "corridor": null
+  },
+  "BM ShriJunc(CMH-100FtRd)Junc": {
+    "event_count": 3,
+    "avg_clearance_mins": 51.2,
+    "top_causes": {
+      "vehicle_breakdown": 2,
+      "tree_fall": 1
+    },
+    "corridor": "IRR(Thanisandra road)"
+  },
+  "ManipalCentreJunc": {
+    "event_count": 2,
+    "avg_clearance_mins": 38.2,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": "Old Madras Road"
+  },
+  "Arts&CraftsCircle": {
+    "event_count": 2,
+    "avg_clearance_mins": 9.2,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": "Old Madras Road"
+  },
+  "DevangaHostelJunction": {
+    "event_count": 5,
+    "avg_clearance_mins": 14.7,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "pot_holes": 1
+    },
+    "corridor": "Mysore Road"
+  },
+  "17th Mn 1st Crs Aishwarya Stores Jn": {
+    "event_count": 1,
+    "avg_clearance_mins": 55.8,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "BDA Junctio-Koramangala": {
+    "event_count": 6,
+    "avg_clearance_mins": 64.2,
+    "top_causes": {
+      "pot_holes": 4,
+      "others": 1,
+      "construction": 1
+    },
+    "corridor": "IRR(Thanisandra road)"
+  },
+  "WiproJunc-Koramangala": {
+    "event_count": 1,
+    "avg_clearance_mins": 215.3,
+    "top_causes": {
+      "tree_fall": 1
+    },
+    "corridor": null
+  },
+  "GangammagudiJunc": {
+    "event_count": 6,
+    "avg_clearance_mins": 35.8,
+    "top_causes": {
+      "vehicle_breakdown": 6
+    },
+    "corridor": null
+  },
+  "BasaweshwaraCircle": {
+    "event_count": 5,
+    "avg_clearance_mins": 69.4,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "accident": 1
+    },
+    "corridor": "Bellary Road 1"
+  },
+  "MarenahalliRd-18thMainRdJunc": {
+    "event_count": 2,
+    "avg_clearance_mins": 20.3,
+    "top_causes": {
+      "procession": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "CholurpalyaJunction(MagadiRd)": {
+    "event_count": 2,
+    "avg_clearance_mins": 37.6,
+    "top_causes": {
+      "vehicle_breakdown": 1,
+      "others": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "KCG HospitalJunction": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "others": 1,
+      "procession": 1
+    },
+    "corridor": null
+  },
+  "DickensonRd-AdigasJunc": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "others": 1
+    },
+    "corridor": null
+  },
+  "AnandRaoJunction": {
+    "event_count": 7,
+    "avg_clearance_mins": 44.2,
+    "top_causes": {
+      "vehicle_breakdown": 7
+    },
+    "corridor": null
+  },
+  "SagarHospitalJunc": {
+    "event_count": 5,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 5
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "VijayanagarBusStandJunction": {
+    "event_count": 6,
+    "avg_clearance_mins": 31.7,
+    "top_causes": {
+      "vehicle_breakdown": 4,
+      "public_event": 2
+    },
+    "corridor": "West of Chord Road"
+  },
+  "BhashyamCircle": {
+    "event_count": 3,
+    "avg_clearance_mins": 45.6,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": "West of Chord Road"
+  },
+  "PuttammaChoultryNagarbhavi": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1,
+      "accident": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "OldMadrasRd-BMTC DepotJunc": {
+    "event_count": 1,
+    "avg_clearance_mins": 19.6,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "Old Madras Road"
+  },
+  "ColesParkJunc": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "others": 1
+    },
+    "corridor": null
+  },
+  "LalbaghWestGate": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "KamakyaJunction": {
+    "event_count": 1,
+    "avg_clearance_mins": 44.5,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "ORR West 1"
+  },
+  "CMH Rd-AdarshTheaterJunc": {
+    "event_count": 5,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "road_conditions": 3,
+      "pot_holes": 2
+    },
+    "corridor": "Old Madras Road"
+  },
+  "Devanahalli new bus stand": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "RajarajeshwariKalyanaMantapaJunc": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "West of Chord Road"
+  },
+  "CIL CrossJunction-JayamahalRd": {
+    "event_count": 4,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 4
+    },
+    "corridor": null
+  },
+  "NationalCollege": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "accident": 1
+    },
+    "corridor": null
+  },
+  "DMRoadJunc(Basavangudi)": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "YediyurMeternityHospital": {
+    "event_count": 1,
+    "avg_clearance_mins": 53.0,
+    "top_causes": {
+      "tree_fall": 1
+    },
+    "corridor": null
+  },
+  "J D MaraJunc": {
+    "event_count": 3,
+    "avg_clearance_mins": 21.0,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": "Bannerghata Road"
+  },
+  "5thMainRPC Layout-Vijayanagar": {
+    "event_count": 3,
+    "avg_clearance_mins": 30.2,
+    "top_causes": {
+      "vehicle_breakdown": 3
+    },
+    "corridor": "West of Chord Road"
+  },
+  "JP Nagar 9th cross-24th main jn": {
+    "event_count": 5,
+    "avg_clearance_mins": 114.1,
+    "top_causes": {
+      "vehicle_breakdown": 5
+    },
+    "corridor": null
+  },
+  "Geethanjali jn": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "procession": 1,
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "ISRO Junction-NewBEL Rd": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "construction": 1
+    },
+    "corridor": null
+  },
+  "MaharajaJunction": {
+    "event_count": 2,
+    "avg_clearance_mins": 33.5,
+    "top_causes": {
+      "vehicle_breakdown": 2
+    },
+    "corridor": null
+  },
+  "UpparpetJunction": {
+    "event_count": 2,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "construction": 2
+    },
+    "corridor": null
+  },
+  "HosmatJunction": {
+    "event_count": 3,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "tree_fall": 2,
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "ESI(k r puram)": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "congestion": 1
+    },
+    "corridor": null
+  },
+  "KHB Junction": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "Magadi Road"
+  },
+  "MSRamaiahHospitalJunc": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "ThomasCafe-New": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "K G Junction": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "pot_holes": 1
+    },
+    "corridor": null
+  },
+  "Geeta Circle": {
+    "event_count": 1,
+    "avg_clearance_mins": 70.3,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": null
+  },
+  "BrigadeMillenium": {
+    "event_count": 1,
+    "avg_clearance_mins": null,
+    "top_causes": {
+      "tree_fall": 1
+    },
+    "corridor": null
+  },
+  "NagaTheaterJunc-Ulsoor": {
+    "event_count": 1,
+    "avg_clearance_mins": 2292.3,
+    "top_causes": {
+      "tree_fall": 1
+    },
+    "corridor": null
+  },
+  "SafinaPlazaJunc": {
+    "event_count": 1,
+    "avg_clearance_mins": 64.5,
+    "top_causes": {
+      "vehicle_breakdown": 1
+    },
+    "corridor": "CBD 1"
+  }
+}

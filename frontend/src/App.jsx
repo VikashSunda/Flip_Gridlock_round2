@@ -1,8 +1,16 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { motion } from 'framer-motion'
+import {
+  Radar, Radio, CalendarClock, Users, Wifi, WifiOff,
+  Loader2, CheckCircle2, Circle, Play, Copy, Siren, BarChart3,
+} from 'lucide-react'
 import './index.css'
-
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8000'
+import ForecastPanel from './ForecastPanel'
+import AllocationPanel from './AllocationPanel'
+import AnalyticsPanel from './AnalyticsPanel'
+import MapView from './MapView'
+import { API_BASE, streamPipeline } from './lib/stream'
 
 const CAUSE_COLORS = {
   vehicle_breakdown: '#d97706',
@@ -41,13 +49,6 @@ const SEVERITY_CLASS = {
   Critical: 'critical',
 }
 
-const BOUNDS = {
-  minLat: 12.85,
-  maxLat: 13.15,
-  minLon: 77.45,
-  maxLon: 77.75,
-}
-
 const FILTERS = [
   ['all', 'All'],
   ['accident', 'Accident'],
@@ -56,6 +57,13 @@ const FILTERS = [
   ['tree_fall', 'Tree fall'],
   ['public_event', 'Public event'],
   ['vip_movement', 'VIP'],
+]
+
+const MODES = [
+  ['live', 'Live incident', Radio],
+  ['forecast', 'Event forecast', CalendarClock],
+  ['allocate', 'Force allocation', Users],
+  ['analytics', 'Analytics', BarChart3],
 ]
 
 const MISSION_STEPS = [
@@ -100,12 +108,6 @@ function severityLabel(event) {
   return SEVERITY_LABELS[event?.severity_score] || 'Moderate'
 }
 
-function pointFromLatLon(latitude, longitude) {
-  const x = ((longitude - BOUNDS.minLon) / (BOUNDS.maxLon - BOUNDS.minLon)) * 100
-  const y = ((BOUNDS.maxLat - latitude) / (BOUNDS.maxLat - BOUNDS.minLat)) * 100
-  return { x, y, visible: x >= 0 && x <= 100 && y >= 0 && y <= 100 }
-}
-
 function pickDemoEvent(events) {
   const eligible = events.filter(event =>
     event.latitude &&
@@ -142,7 +144,13 @@ function pickShowcaseEvents(events) {
 
 function StatusBadge({ status }) {
   const label = status === 'complete' ? 'Done' : status === 'running' ? 'Running' : 'Waiting'
-  return <span className={`status-badge status-badge--${status}`}>{label}</span>
+  const Icon = status === 'complete' ? CheckCircle2 : status === 'running' ? Loader2 : Circle
+  return (
+    <span className={`status-badge status-badge--${status}`}>
+      <Icon size={12} className={status === 'running' ? 'spin' : ''} />
+      {label}
+    </span>
+  )
 }
 
 function App() {
@@ -163,8 +171,23 @@ function App() {
     command: 'idle',
   })
   const [pipelineComplete, setPipelineComplete] = useState(false)
+  const [mode, setMode] = useState('live')
+
+
+  const [replayActive, setReplayActive] = useState(false)
+  const [replayTimeline, setReplayTimeline] = useState(null)
+  const [replayLoading, setReplayLoading] = useState(false)
+  const [replayPlaying, setReplayPlaying] = useState(false)
+  const [replayClockSec, setReplayClockSec] = useState(0)
+  const [replaySpeed, setReplaySpeed] = useState(60)
+  const [firedAlertKeys, setFiredAlertKeys] = useState([])
+  const [surgeLog, setSurgeLog] = useState([])
+  const [activeAlert, setActiveAlert] = useState(null)
 
   const commandRef = useRef(null)
+  const replayTimerRef = useRef(null)
+  const autoAnalyzedRef = useRef(false)
+  const runAnalysisRef = useRef(null)
 
   useEffect(() => {
     Promise.all([
@@ -212,37 +235,38 @@ function App() {
 
   const currentSeverity = severityLabel(selectedEvent)
   const severityClass = SEVERITY_CLASS[currentSeverity] || 'moderate'
-  const topAffected = spatialResult?.blast_radius?.affected_nodes?.slice(0, 5) || []
-  const epicenterPoint = spatialResult?.epicenter
-    ? pointFromLatLon(spatialResult.epicenter.latitude, spatialResult.epicenter.longitude)
-    : selectedEvent
-      ? pointFromLatLon(selectedEvent.latitude, selectedEvent.longitude)
-      : null
+  const topAffected = useMemo(
+    () => spatialResult?.blast_radius?.affected_nodes?.slice(0, 5) || [],
+    [spatialResult],
+  )
+
+  const mapEpicenter = useMemo(() => {
+    if (spatialResult?.epicenter) {
+      return {
+        latitude: spatialResult.epicenter.latitude,
+        longitude: spatialResult.epicenter.longitude,
+        label: `Epicenter · ${cleanValue(selectedEvent?.junction, spatialResult.epicenter.nearest_junction || 'Live event')}`,
+      }
+    }
+    if (selectedEvent) {
+      return {
+        latitude: Number(selectedEvent.latitude),
+        longitude: Number(selectedEvent.longitude),
+        label: cleanValue(selectedEvent.junction, 'Live event'),
+      }
+    }
+    return null
+  }, [spatialResult, selectedEvent])
 
   const impactSummary = spatialResult
     ? `${spatialResult.blast_radius.total_affected_junctions} junctions in ${spatialResult.blast_radius.max_radius_km} km`
     : 'Awaiting forecast'
 
   const savedMinutes = spatialResult?.counterfactual?.time_saved_mins
-  const unitCount = spatialResult?.deployment_recommendation?.astram_units_needed
+  const unitCount = spatialResult?.deployment_recommendation?.manpower?.units
   const mapStatus = integrations?.mapmyindia?.status || 'offline_fallback'
-  const geminiModel = integrations?.gemini?.model || 'gemini-3.5-flash'
-  const capabilityScore = [
-    stats?.total_events > 1000,
-    stats?.junctions_in_graph > 10,
-    mapStatus === 'connected',
-    integrations?.gemini?.status === 'connected',
-    Boolean(spatialResult && ragResult),
-  ].filter(Boolean).length
-  const confidenceScore = spatialResult && ragResult
-    ? Math.min(
-      96,
-      68 +
-        Math.min(12, spatialResult.blast_radius.critical_junctions * 3) +
-        Math.min(10, Math.floor((ragResult.pattern_analysis?.total_similar_events_found || 0) / 2)) +
-        (mapStatus === 'connected' ? 6 : 0)
-    )
-    : null
+  const hasEvidence = Boolean(spatialResult && ragResult)
+
   const interventionScenarios = spatialResult ? [
     {
       label: 'Monitor only',
@@ -256,12 +280,6 @@ function App() {
       clearance: spatialResult.counterfactual.with_intervention_mins,
       saved: spatialResult.counterfactual.time_saved_mins,
     },
-    {
-      label: 'Surge response',
-      units: unitCount + 2,
-      clearance: Math.max(8, spatialResult.counterfactual.with_intervention_mins - 8),
-      saved: spatialResult.counterfactual.time_saved_mins + 8,
-    },
   ] : []
 
   const handleSelectEvent = useCallback((event) => {
@@ -273,8 +291,9 @@ function App() {
     setPipelineComplete(false)
   }, [])
 
-  const runAnalysis = useCallback(async () => {
-    if (!selectedEvent || analyzing) return
+  const runAnalysis = useCallback(async (eventOverride) => {
+    const target = eventOverride && eventOverride.id ? eventOverride : selectedEvent
+    if (!target || analyzing) return
 
     setAnalyzing(true)
     setSpatialResult(null)
@@ -284,62 +303,29 @@ function App() {
     setAgentStatuses({ spatial: 'running', rag: 'running', command: 'idle' })
 
     try {
-      const response = await fetch(`${API_BASE}/analyze/${selectedEvent.id}`, { method: 'POST' })
-      if (!response.ok || !response.body) {
-        throw new Error(`Analysis failed with HTTP ${response.status}`)
-      }
-
-      const reader = response.body.getReader()
-      const decoder = new TextDecoder()
-      let buffer = ''
-
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-
-        buffer += decoder.decode(value, { stream: true })
-        const lines = buffer.split('\n')
-        buffer = lines.pop() || ''
-
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue
-
-          try {
-            const data = JSON.parse(line.slice(6))
-
-            if (data.type === 'status') {
-              setAgentStatuses(prev => ({ ...prev, [data.agent]: 'running' }))
-            }
-
-            if (data.type === 'spatial_result') {
-              setSpatialResult(data.data)
-              setAgentStatuses(prev => ({ ...prev, spatial: 'complete' }))
-            }
-
-            if (data.type === 'rag_result') {
-              setRagResult(data.data)
-              setAgentStatuses(prev => ({ ...prev, rag: 'complete' }))
-            }
-
-            if (data.type === 'command_chunk') {
-              setAgentStatuses(prev => ({ ...prev, command: 'running' }))
-              setCommandText(prev => prev + data.text)
-            }
-
-            if (data.type === 'complete') {
-              setAgentStatuses(prev => ({ ...prev, command: 'complete' }))
-              setPipelineComplete(true)
-            }
-
-            if (data.type === 'error') {
-              setCommandText(`### Pipeline Alert\n${data.message}`)
-              setAgentStatuses(prev => ({ ...prev, command: 'complete' }))
-            }
-          } catch (err) {
-            console.warn('Skipping malformed stream line', err)
-          }
-        }
-      }
+      await streamPipeline(`${API_BASE}/analyze/${target.id}`, null, {
+        status: data => setAgentStatuses(prev => ({ ...prev, [data.agent]: 'running' })),
+        spatial_result: data => {
+          setSpatialResult(data.data)
+          setAgentStatuses(prev => ({ ...prev, spatial: 'complete' }))
+        },
+        rag_result: data => {
+          setRagResult(data.data)
+          setAgentStatuses(prev => ({ ...prev, rag: 'complete' }))
+        },
+        command_chunk: data => {
+          setAgentStatuses(prev => ({ ...prev, command: 'running' }))
+          setCommandText(prev => prev + data.text)
+        },
+        complete: () => {
+          setAgentStatuses(prev => ({ ...prev, command: 'complete' }))
+          setPipelineComplete(true)
+        },
+        error: data => {
+          setCommandText(`### Pipeline Alert\n${data.message}`)
+          setAgentStatuses(prev => ({ ...prev, command: 'complete' }))
+        },
+      })
     } catch (err) {
       console.error('Analysis failed:', err)
       setCommandText(`### Pipeline Alert\n${err.message}. Check that the backend is running and the event data is loaded.`)
@@ -349,15 +335,159 @@ function App() {
     }
   }, [selectedEvent, analyzing])
 
+
+  useEffect(() => { runAnalysisRef.current = runAnalysis }, [runAnalysis])
+
+
+  const eventsById = useMemo(() => {
+    const map = {}
+    for (const e of events) map[e.id] = e
+    return map
+  }, [events])
+
+  const analyzeAnchor = useCallback((alert) => {
+    const anchor = eventsById[alert.anchor_event_id]
+    setActiveAlert(alert)
+    if (anchor) {
+      setSelectedEvent(anchor)
+      runAnalysisRef.current?.(anchor)
+    }
+  }, [eventsById])
+
+  const startReplay = useCallback(async () => {
+    setReplayActive(true)
+    setReplayClockSec(0)
+    setFiredAlertKeys([])
+    setSurgeLog([])
+    setActiveAlert(null)
+    autoAnalyzedRef.current = false
+    let tl = replayTimeline
+    if (!tl) {
+      setReplayLoading(true)
+      try {
+        tl = await fetch(`${API_BASE}/replay/timeline`).then(r => r.json())
+        setReplayTimeline(tl)
+      } catch (err) {
+        console.error('Replay load failed:', err)
+        setLoadError('Could not load the replay timeline. Is the backend running on :8000?')
+        setReplayActive(false)
+        return
+      } finally {
+        setReplayLoading(false)
+      }
+    }
+    setReplayPlaying(true)
+  }, [replayTimeline])
+
+  const restartReplay = useCallback(() => {
+    setReplayClockSec(0)
+    setFiredAlertKeys([])
+    setSurgeLog([])
+    setActiveAlert(null)
+    autoAnalyzedRef.current = false
+    setReplayPlaying(true)
+  }, [])
+
+  const exitReplay = useCallback(() => {
+    setReplayActive(false)
+    setReplayPlaying(false)
+    setReplayClockSec(0)
+    setActiveAlert(null)
+  }, [])
+
+
+  useEffect(() => {
+    if (!replayActive || !replayPlaying || !replayTimeline) return
+    replayTimerRef.current = setInterval(() => {
+      setReplayClockSec(prev => Math.min(prev + replaySpeed, replayTimeline.duration_sec))
+    }, 250)
+    return () => clearInterval(replayTimerRef.current)
+  }, [replayActive, replayPlaying, replayTimeline, replaySpeed])
+
+
+  useEffect(() => {
+    if (replayTimeline && replayPlaying && replayClockSec >= replayTimeline.duration_sec) {
+      setReplayPlaying(false)
+    }
+  }, [replayClockSec, replayTimeline, replayPlaying])
+
+
+  const arrivedReplay = useMemo(() => {
+    if (!replayActive || !replayTimeline) return null
+    return replayTimeline.events.filter(e => e.t_offset_sec <= replayClockSec)
+  }, [replayActive, replayTimeline, replayClockSec])
+
+  const replayVisible = useMemo(() => {
+    if (!arrivedReplay) return null
+    return arrivedReplay.map(e => eventsById[e.id]).filter(Boolean)
+  }, [arrivedReplay, eventsById])
+
+
+  useEffect(() => {
+    if (!replayActive || !replayTimeline) return
+    const due = replayTimeline.alerts.filter(
+      a => a.fire_at_offset_sec <= replayClockSec
+        && !firedAlertKeys.includes(`${a.anchor_event_id}:${a.fire_at_offset_sec}`)
+    )
+    if (due.length === 0) return
+    setFiredAlertKeys(prev => [...prev, ...due.map(a => `${a.anchor_event_id}:${a.fire_at_offset_sec}`)])
+    setSurgeLog(prev => [...due.slice().reverse(), ...prev])
+    setActiveAlert(due[due.length - 1])
+    if (!autoAnalyzedRef.current) {
+      autoAnalyzedRef.current = true
+      const anchor = eventsById[due[0].anchor_event_id]
+      if (anchor) {
+        setSelectedEvent(anchor)
+        runAnalysisRef.current?.(anchor)
+      }
+    }
+  }, [replayClockSec, replayActive, replayTimeline, firedAlertKeys, eventsById])
+
+  const replayClock = arrivedReplay && arrivedReplay.length
+    ? arrivedReplay[arrivedReplay.length - 1].clock
+    : replayTimeline?.events?.[0]?.clock || '--:--'
+  const replayProgress = replayTimeline?.duration_sec
+    ? Math.min(100, Math.round((replayClockSec / replayTimeline.duration_sec) * 100))
+    : 0
+
+
+  const displayMapEvents = useMemo(
+    () => (replayVisible ? replayVisible.slice(-650) : mapEvents),
+    [replayVisible, mapEvents],
+  )
+  const queueEvents = replayVisible
+    ? [...replayVisible].reverse().filter(e => e.severity_score >= 6).slice(0, 12)
+    : priorityQueue
+
   return (
     <div className="app-shell">
       <header className="topbar">
         <div className="brand-block">
-          <div className="brand-mark">AN</div>
+          <div className="brand-mark"><Radar size={20} /></div>
           <div>
             <h1>ASTraM Nexus</h1>
             <p>Event-driven congestion command center</p>
           </div>
+        </div>
+
+        <div className="mode-switch" role="tablist">
+          {MODES.map(([key, label, Icon]) => (
+            <button
+              key={key}
+              className={`mode-tab ${mode === key ? 'is-active' : ''}`}
+              onClick={() => setMode(key)}
+            >
+              {mode === key && (
+                <motion.span
+                  layoutId="mode-indicator"
+                  className="mode-indicator"
+                  transition={{ type: 'spring', stiffness: 420, damping: 34 }}
+                />
+              )}
+              <Icon size={15} />
+              <span className="mode-tab-label">{label}</span>
+            </button>
+          ))}
         </div>
 
         <div className="topbar-metrics">
@@ -367,51 +497,70 @@ function App() {
           </div>
           <div>
             <strong>{stats?.junctions_in_graph || '--'}</strong>
-            <span>causal nodes</span>
+            <span>graph junctions</span>
           </div>
           <div>
             <strong>{stats?.spatial_edges || '--'}</strong>
-            <span>road dependencies</span>
+            <span>proximity edges</span>
           </div>
         </div>
 
         <div className={`system-state system-state--${mapStatus}`}>
           <span />
-          {mapStatus === 'connected' ? 'MapmyIndia credentials connected' : 'Offline graph fallback'}
+          {mapStatus === 'connected' ? <Wifi size={14} /> : <WifiOff size={14} />}
+          {mapStatus === 'connected' ? 'MapmyIndia credentials set (routing offline)' : 'Offline graph fallback'}
         </div>
       </header>
 
+      {mode === 'analytics' ? (
+        <main className="workspace workspace--forecast">
+          <AnalyticsPanel events={events} causeColors={CAUSE_COLORS} />
+        </main>
+      ) : mode === 'allocate' ? (
+        <main className="workspace workspace--forecast">
+          <AllocationPanel />
+        </main>
+      ) : mode === 'forecast' ? (
+        <main className="workspace workspace--forecast">
+          <ForecastPanel />
+        </main>
+      ) : (
       <main className="workspace">
         <aside className="left-rail">
           <section className="brief-panel">
-            <p className="eyebrow">Demo objective</p>
-            <h2>Forecast the blast radius, then issue a field order.</h2>
+            <p className="eyebrow">Reactive workflow</p>
+            <h2>Estimate the spillover, then issue a field order.</h2>
             <p>
-              This screen is built for a 2 minute judge demo: pick an incident, run the
-              three-agent pipeline, and show why the recommended deployment changes the outcome.
+              Pick an incident and run the three-agent pipeline: spatial spillover,
+              historical evidence, and a prescriptive deployment plan — every number
+              tagged with its data source and sample size.
             </p>
           </section>
 
           <section className="readiness-panel">
             <div className="section-heading">
-              <span>Readiness score</span>
-              <small>{capabilityScore}/5 live</small>
-            </div>
-            <div className="score-ring">
-              <strong>{Math.round((capabilityScore / 5) * 100)}%</strong>
-              <span>submission ready</span>
+              <span>Provenance &amp; validation</span>
+              <small>auditable</small>
             </div>
             <div className="readiness-item">
-              <strong>Gemini command agent</strong>
-              <span>{geminiModel}</span>
+              <strong>Source</strong>
+              <span>Historical snapshot (Nov 2023 – Apr 2024) — not a live external feed</span>
             </div>
             <div className="readiness-item">
-              <strong>MapmyIndia routing</strong>
-              <span>{mapStatus === 'connected' ? 'OAuth credentials connected, routing-ready' : 'Credential pending, local graph active'}</span>
+              <strong>Spatial</strong>
+              <span>Proximity heuristic: impact = severity × exp(−λ·d) × time-weight</span>
             </div>
             <div className="readiness-item">
-              <strong>Judge story</strong>
-              <span>Every recommendation shows spatial cause, historical proof, and counterfactual outcome.</span>
+              <strong>Clearance</strong>
+              <span>Empirical median prior as a band — held-out MAE 40.7 min, within ±15 min 26% of the time</span>
+            </div>
+            <div className="readiness-item">
+              <strong>Model check</strong>
+              <span>An HGBR was tested; it did not beat the median baseline on MAE, so we ship the auditable prior</span>
+            </div>
+            <div className="readiness-item">
+              <strong>Routing / Learning</strong>
+              <span>Metering anchors over the offline incident graph (approximate, not validated road routes); feedback is outcome logging (refines priors on re-train)</span>
             </div>
           </section>
 
@@ -437,8 +586,10 @@ function App() {
 
           <section className="control-panel">
             <div className="section-heading">
-              <span>Incident queue</span>
-              <small>{filteredEvents.length.toLocaleString()} visible</small>
+              <span>{replayActive ? 'Live incident feed' : 'Incident queue'}</span>
+              <small>{replayActive
+                ? `${arrivedReplay?.length || 0} arrived`
+                : `${filteredEvents.length.toLocaleString()} visible`}</small>
             </div>
 
             <div className="filter-grid">
@@ -456,7 +607,7 @@ function App() {
             {loadError && <div className="load-error">{loadError}</div>}
 
             <div className="queue-list">
-              {priorityQueue.map(event => (
+              {queueEvents.map(event => (
                 <button
                   key={event.id}
                   className={`queue-item ${selectedEvent?.id === event.id ? 'is-active' : ''}`}
@@ -476,6 +627,49 @@ function App() {
         </aside>
 
         <section className="map-stage">
+          <div className={`replay-bar ${replayActive ? 'is-active' : ''}`}>
+            <div className="replay-bar-main">
+              {!replayActive ? (
+                <>
+                  <button className="primary-action replay-start" onClick={startReplay} disabled={replayLoading}>
+                    {replayLoading ? 'Loading replay…' : '▶ Start historical replay'}
+                  </button>
+                  <span className="replay-hint">
+                    Replays the {`2024-03-07`} snapshot and auto-detects sudden incident surges — not a live feed.
+                  </span>
+                </>
+              ) : (
+                <>
+                  <button className="secondary-action" onClick={() => setReplayPlaying(p => !p)}>
+                    {replayPlaying ? '⏸ Pause' : '▶ Play'}
+                  </button>
+                  <button className="secondary-action" onClick={restartReplay}>↻ Restart</button>
+                  <span className="replay-clock">{replayClock}</span>
+                  <div className="replay-progress"><i style={{ width: `${replayProgress}%` }} /></div>
+                  <div className="replay-speeds">
+                    {[[30, '1×'], [60, '2×'], [180, '6×']].map(([v, l]) => (
+                      <button
+                        key={v}
+                        className={`speed-chip ${replaySpeed === v ? 'is-active' : ''}`}
+                        onClick={() => setReplaySpeed(v)}
+                      >{l}</button>
+                    ))}
+                  </div>
+                  <button className="ghost-action" onClick={exitReplay}>Exit</button>
+                </>
+              )}
+            </div>
+            {replayActive && (
+              <div className="replay-meta">
+                <span className="replay-label">{replayTimeline?.window_label || 'Historical replay — not a live external feed'}</span>
+                <span className="replay-rule">Detector rule: {replayTimeline?.rule_text || '--'}</span>
+                <span className="replay-count">
+                  {arrivedReplay?.length || 0}/{replayTimeline?.total_events || 0} incidents · {surgeLog.length} surge{surgeLog.length === 1 ? '' : 's'} detected
+                </span>
+              </div>
+            )}
+          </div>
+
           <div className="map-toolbar">
             <div>
               <p className="eyebrow">Bengaluru operational graph</p>
@@ -483,7 +677,7 @@ function App() {
             </div>
             <div className="map-toolbar-actions">
               <span className="provider-chip">
-                {spatialResult?.causal_analysis?.routing_provider || (mapStatus === 'connected' ? 'MapmyIndia ready' : 'Offline graph')}
+                {spatialResult?.model?.routing_provider || (mapStatus === 'connected' ? 'MapmyIndia ready' : 'Offline graph')}
               </span>
               <div className={`severity-pill severity-pill--${severityClass}`}>
                 {currentSeverity} risk
@@ -492,85 +686,35 @@ function App() {
           </div>
 
           <div className="map-canvas">
-            <div className="map-grid" />
-            <div className="road road-a" />
-            <div className="road road-b" />
-            <div className="road road-c" />
-            <div className="road road-d" />
-
-            <svg className="impact-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
-              {epicenterPoint && topAffected.map(node => {
-                const nodePoint = pointFromLatLon(node.latitude, node.longitude)
-                if (!epicenterPoint.visible || !nodePoint.visible) return null
-                return (
-                  <line
-                    key={node.junction}
-                    x1={epicenterPoint.x}
-                    y1={epicenterPoint.y}
-                    x2={nodePoint.x}
-                    y2={nodePoint.y}
-                  />
-                )
-              })}
-            </svg>
-
-            {mapEvents.map(event => {
-              const { x, y, visible } = pointFromLatLon(event.latitude, event.longitude)
-              if (!visible) return null
-
-              const isSelected = selectedEvent?.id === event.id
-              const color = CAUSE_COLORS[event.event_cause] || '#64748b'
-
-              return (
-                <button
-                  key={event.id}
-                  className={`map-dot ${isSelected ? 'is-selected' : ''}`}
-                  style={{
-                    left: `${x}%`,
-                    top: `${y}%`,
-                    '--dot-color': color,
-                    '--dot-size': `${Math.max(7, Math.min(14, event.severity_score + 4))}px`,
-                  }}
-                  onClick={() => handleSelectEvent(event)}
-                  title={`${formatCause(event.event_cause)} - ${event.address || event.id}`}
-                />
-              )
-            })}
-
-            {topAffected.map((node, index) => {
-              const { x, y, visible } = pointFromLatLon(node.latitude, node.longitude)
-              if (!visible) return null
-              const impact = Math.round(node.causal_impact_probability * 100)
-              return (
-                <div
-                  key={node.junction}
-                  className="impact-node"
-                  style={{
-                    left: `${x}%`,
-                    top: `${y}%`,
-                    '--impact-delay': `${index * 140}ms`,
-                    '--impact-size': `${44 + impact / 2}px`,
-                  }}
-                >
-                  <span>{impact}%</span>
+            {replayActive && activeAlert && (
+              <div className="surge-banner">
+                <div className="surge-banner-icon"><Siren size={22} /></div>
+                <div className="surge-banner-body">
+                  <strong>Surge detected — {formatCause(activeAlert.dominant_cause)} cluster</strong>
+                  <span>
+                    {activeAlert.n} high-severity incidents within {activeAlert.radius_km} km in {activeAlert.span_mins} min
+                    · near {cleanValue(activeAlert.police_station)} · {activeAlert.fire_at_clock}
+                  </span>
                 </div>
-              )
-            })}
-
-            {epicenterPoint?.visible && (
-              <div
-                className="epicenter-card"
-                style={{ left: `${epicenterPoint.x}%`, top: `${epicenterPoint.y}%` }}
-              >
-                <span>Epicenter</span>
-                <strong>{cleanValue(selectedEvent?.junction, spatialResult?.epicenter?.nearest_junction || 'Live event')}</strong>
+                <button className="secondary-action" onClick={() => analyzeAnchor(activeAlert)} disabled={analyzing}>
+                  {analyzing ? 'Analyzing…' : 'Analyze anchor'}
+                </button>
+                <button className="banner-dismiss" onClick={() => setActiveAlert(null)} aria-label="Dismiss">×</button>
               </div>
             )}
+            <MapView
+              events={displayMapEvents}
+              selected={selectedEvent}
+              epicenter={mapEpicenter}
+              affected={topAffected}
+              causeColors={CAUSE_COLORS}
+              onSelect={handleSelectEvent}
+            />
 
             <div className="map-legend">
               <span><i className="legend-dot incident" /> Incident density</span>
               <span><i className="legend-dot affected" /> Predicted spillover</span>
-              <span><i className="legend-line" /> Causal impact path</span>
+              <span><i className="legend-line" /> Spillover path (proximity)</span>
             </div>
           </div>
 
@@ -584,11 +728,13 @@ function App() {
               <strong>{unitCount || '--'}</strong>
             </div>
             <div>
-              <span>Time saved</span>
-              <strong>{savedMinutes ? `${savedMinutes} min` : '--'}</strong>
+              <span>Modeled recovery</span>
+              <strong>{savedMinutes ? `~${savedMinutes} min` : '--'}</strong>
             </div>
-            <button className="primary-action" onClick={runAnalysis} disabled={!selectedEvent || analyzing}>
-              {analyzing ? 'Running agents...' : pipelineComplete ? 'Run again' : 'Run 3-agent forecast'}
+            <button className="primary-action" onClick={() => runAnalysis()} disabled={!selectedEvent || analyzing}>
+              {analyzing
+                ? <><Loader2 size={16} className="spin" />Running agents...</>
+                : <><Play size={16} />{pipelineComplete ? 'Run again' : 'Run 3-agent forecast'}</>}
             </button>
           </div>
         </section>
@@ -642,27 +788,53 @@ function App() {
             )}
           </section>
 
+          {replayActive && surgeLog.length > 0 && (
+            <section className="intel-panel surge-log-panel">
+              <div className="section-heading">
+                <span>Surge log</span>
+                <small>{surgeLog.length} detected</small>
+              </div>
+              <p className="muted" style={{ marginTop: '-2px', marginBottom: '8px' }}>
+                First surge auto-runs the 3-agent pipeline; click any other to analyze its anchor.
+              </p>
+              {surgeLog.slice(0, 8).map(a => (
+                <button
+                  key={`${a.anchor_event_id}:${a.fire_at_offset_sec}`}
+                  className={`surge-log-item ${selectedEvent?.id === a.anchor_event_id ? 'is-active' : ''}`}
+                  onClick={() => analyzeAnchor(a)}
+                >
+                  <span className="surge-time">{a.fire_at_clock}</span>
+                  <span className="surge-desc">
+                    <strong>{a.n}× {formatCause(a.dominant_cause)}</strong>
+                    <small>near {cleanValue(a.police_station)} · sev {a.anchor_severity}</small>
+                  </span>
+                  <span className="surge-go">Analyze →</span>
+                </button>
+              ))}
+            </section>
+          )}
+
           <section className="agent-panel">
             <div className="section-heading">
               <span>Agent pipeline</span>
               <small>{pipelineComplete ? 'Complete' : analyzing ? 'In progress' : 'Ready'}</small>
             </div>
 
-            <div className="agent-row">
+            <div className={`agent-row is-${agentStatuses.spatial}`}>
               <div>
-                <strong>Spatial-Causal Engine</strong>
-                <span>Computes downstream spillover and affected junctions.</span>
+                <strong>Spatial Propagation Engine</strong>
+                <span>Distance-decay spillover heuristic over the junction graph (not causal inference).</span>
               </div>
               <StatusBadge status={agentStatuses.spatial} />
             </div>
-            <div className="agent-row">
+            <div className={`agent-row is-${agentStatuses.rag}`}>
               <div>
                 <strong>RAG Intelligence Core</strong>
                 <span>Finds similar incidents and clearance patterns.</span>
               </div>
               <StatusBadge status={agentStatuses.rag} />
             </div>
-            <div className="agent-row">
+            <div className={`agent-row is-${agentStatuses.command}`}>
               <div>
                 <strong>Command Synthesizer</strong>
                 <span>Turns evidence into deployment instructions.</span>
@@ -671,28 +843,24 @@ function App() {
             </div>
           </section>
 
-          {confidenceScore && (
+          {hasEvidence && (
             <section className="confidence-panel">
               <div className="section-heading">
-                <span>Command confidence</span>
-                <small>Explainability</small>
-              </div>
-              <div className="confidence-score">
-                <strong>{confidenceScore}%</strong>
-                <span>based on spatial propagation, historical matches, and provider readiness</span>
+                <span>Evidence audit</span>
+                <small>provenance</small>
               </div>
               <div className="audit-list">
                 <div>
                   <b>Spatial evidence</b>
-                  <span>{spatialResult.blast_radius.total_affected_junctions} affected junctions, {spatialResult.blast_radius.critical_junctions} critical.</span>
+                  <span>{spatialResult.blast_radius.total_affected_junctions} affected junctions, {spatialResult.blast_radius.critical_junctions} critical (proximity heuristic).</span>
                 </div>
                 <div>
                   <b>Historical evidence</b>
-                  <span>{ragResult.pattern_analysis?.total_similar_events_found || 0} similar incidents retrieved.</span>
+                  <span>{ragResult.pattern_analysis?.total_similar_events_found || 0} similar incidents retrieved (TF-IDF + metadata).</span>
                 </div>
                 <div>
-                  <b>Action evidence</b>
-                  <span>{unitCount} ASTraM units reduce clearance by {savedMinutes} minutes.</span>
+                  <b>Modeled action</b>
+                  <span>{unitCount} units; modeled recovery ≈ {savedMinutes} min (heuristic, not a measured effect).</span>
                 </div>
               </div>
             </section>
@@ -707,7 +875,7 @@ function App() {
                   onClick={() => navigator.clipboard?.writeText(commandText)}
                   type="button"
                 >
-                  Copy order
+                  <Copy size={12} />Copy order
                 </button>
               </div>
               <div className="command-body">
@@ -722,8 +890,13 @@ function App() {
                 <span>Blast radius</span>
                 <small>{spatialResult.blast_radius.critical_junctions} critical</small>
               </div>
+              {spatialResult.model?.note && (
+                <p className="muted" style={{ marginTop: '-2px', marginBottom: '8px' }}>
+                  {spatialResult.model.note}
+                </p>
+              )}
               {topAffected.map(node => {
-                const impact = Math.round(node.causal_impact_probability * 100)
+                const impact = Math.round(node.relative_impact_score * 100)
                 return (
                   <div key={node.junction} className="impact-row">
                     <div>
@@ -743,8 +916,8 @@ function App() {
           {spatialResult?.counterfactual && (
             <section className="outcome-panel">
               <div className="section-heading">
-                <span>Counterfactual outcome</span>
-                <small>Judge-friendly proof</small>
+                <span>Counterfactual (modeled)</span>
+                <small>heuristic</small>
               </div>
               <div className="comparison">
                 <div>
@@ -757,8 +930,12 @@ function App() {
                 </div>
               </div>
               <div className="save-callout">
-                Saves {spatialResult.counterfactual.time_saved_mins} minutes with {unitCount} ASTraM units.
+                Modeled recovery ≈ {spatialResult.counterfactual.time_saved_mins} min faster with {unitCount} units.
               </div>
+              <p className="muted" style={{ marginTop: '4px' }}>
+                Traffic-recovery estimate after the event ends — not the event duration. The
+                intervention effect is assumed, not measured (no controlled trials in the data).
+              </p>
             </section>
           )}
 
@@ -791,12 +968,12 @@ function App() {
               </div>
               <div className="fact-grid compact">
                 <div>
-                  <span>Avg clearance</span>
-                  <strong>{ragResult.pattern_analysis?.avg_clearance_time_mins || '--'} min</strong>
+                  <span>Median clearance</span>
+                  <strong>{ragResult.pattern_analysis?.median_clearance_time_mins ?? '--'} min</strong>
                 </div>
                 <div>
                   <span>Same corridor</span>
-                  <strong>{ragResult.causal_context?.same_corridor_matches || 0}</strong>
+                  <strong>{ragResult.match_context?.same_corridor_matches || 0}</strong>
                 </div>
               </div>
               {(ragResult.pattern_analysis?.known_complications || []).slice(0, 2).map(item => (
@@ -823,6 +1000,7 @@ function App() {
           </section>
         </aside>
       </main>
+      )}
     </div>
   )
 }

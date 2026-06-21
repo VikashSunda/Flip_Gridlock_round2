@@ -1895,7 +1895,7 @@
     "ElectronicCityGate-2Junc": {
       "name": "ElectronicCityGate-2Junc",
       "latitude": 12.855327,
-      "longitude": 77.6649545,
+      "longitude": 77.6649546,
       "event_count": 6,
       "event_ids": [
         "FKID005872",
@@ -1992,7 +1992,7 @@
     "EliteJunc": {
       "name": "EliteJunc",
       "latitude": 12.9762103,
-      "longitude": 77.5751485,
+      "longitude": 77.5751484,
       "event_count": 6,
       "event_ids": [
         "FKID005886",
@@ -2965,7 +2965,7 @@
     "AgaraJunction": {
       "name": "AgaraJunction",
       "latitude": 12.9237319,
-      "longitude": 77.6497059,
+      "longitude": 77.649706,
       "event_count": 6,
       "event_ids": [
         "FKID006159",

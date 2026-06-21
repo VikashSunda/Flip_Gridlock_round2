@@ -1,38 +1,44 @@
 """
 Agent 3: The Command Synthesizer (The Chief)
 
-Takes Agent 1 (spatial-causal) and Agent 2 (RAG historical) outputs
-and generates military-grade prescriptive commands for traffic officers.
+Fuses Agent 1 (spatial) + Agent 2 (RAG) outputs into a prescriptive command.
 
-Uses Gemini for synthesis with a carefully engineered system prompt
-that produces specific, actionable, location-aware commands — not
-generic ChatGPT fluff.
+Two modes (Fix 3):
+  - "reactive": incident response for an unplanned event happening now
+  - "forecast": pre-event deployment plan for a planned/future event
+
+Uses Gemini if a key + valid model are configured; otherwise a deterministic
+fallback that always works (the demo never depends on the LLM).
 """
 
 import json
 import os
-from typing import Optional, AsyncGenerator
+from typing import AsyncGenerator
 
-# Will be initialized with API key
 _model = None
 
 
 def _get_model():
+    """Return (client, model_name) for the current google-genai SDK, or None.
+
+    None triggers the deterministic fallback, so a missing/placeholder key or an
+    uninstalled SDK silently degrades — the demo never errors on a live call.
+    """
     global _model
     if _model is None:
         try:
-            import google.generativeai as genai
+            from google import genai
             from dotenv import load_dotenv
         except ImportError:
             return None
 
         load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env"))
         api_key = os.getenv("GEMINI_API_KEY")
-        if not api_key:
+        if not api_key or api_key == "your_gemini_api_key":
             return None
-        model_name = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
-        genai.configure(api_key=api_key)
-        _model = genai.GenerativeModel(model_name)
+        # Use a current model id; "gemini-3.5-flash" (old default) does not exist.
+        model_name = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+        _model = (genai.Client(api_key=api_key), model_name)
     return _model
 
 
@@ -42,136 +48,164 @@ def _fmt(value, fallback="unknown"):
     return value
 
 
-def _fallback_command(spatial_data: dict, rag_data: dict) -> str:
-    """Deterministic command output for demos when the LLM is unavailable."""
+def _fallback_command(spatial_data: dict, rag_data: dict, mode: str = "reactive") -> str:
+    """Deterministic command output (defensive .get throughout — contract-safe)."""
+    is_forecast = mode == "forecast"
     event_cause = str(spatial_data.get("event_cause", "incident")).replace("_", " ").title()
     event_type = str(spatial_data.get("event_type", "event")).title()
     severity = spatial_data.get("severity_score", 5)
-    epicenter = spatial_data.get("epicenter", {})
-    event_details = spatial_data.get("event_details", {})
-    blast_radius = spatial_data.get("blast_radius", {})
-    counterfactual = spatial_data.get("counterfactual", {})
-    deployment = spatial_data.get("deployment_recommendation", {})
-    pattern = rag_data.get("pattern_analysis", {})
-    causal_context = rag_data.get("causal_context", {})
+    epicenter = spatial_data.get("epicenter", {}) or {}
+    event_details = spatial_data.get("event_details", {}) or {}
+    blast_radius = spatial_data.get("blast_radius", {}) or {}
+    counterfactual = spatial_data.get("counterfactual", {}) or {}
+    deployment = spatial_data.get("deployment_recommendation", {}) or {}
+    manpower = deployment.get("manpower", {}) or {}
+    predicted = spatial_data.get("predicted_clearance", {}) or {}
+    pattern = rag_data.get("pattern_analysis", {}) or {}
+    match_context = rag_data.get("match_context", {}) or {}
 
-    location = _fmt(
-        epicenter.get("nearest_junction"),
-        _fmt(epicenter.get("address"), "reported location"),
-    )
+    location = _fmt(epicenter.get("nearest_junction"), _fmt(epicenter.get("address"), "reported location"))
     priority = "Immediate" if severity >= 8 else "Urgent" if severity >= 6 else "Standard"
     priority_junctions = deployment.get("priority_junctions") or [
-        node.get("junction")
-        for node in blast_radius.get("affected_nodes", [])[:3]
-        if node.get("junction")
+        n.get("junction") for n in blast_radius.get("affected_nodes", [])[:3] if n.get("junction")
     ]
-    top_nodes = blast_radius.get("affected_nodes", [])[:5]
-    units = deployment.get("astram_units_needed", max(2, min(6, len(priority_junctions) + 1)))
+    barricade_points = deployment.get("barricade_points") or priority_junctions[:3]
+    diversion_routes = deployment.get("diversion_routes", []) or []
+    units = manpower.get("units", max(2, len(priority_junctions) + 1))
     station = _fmt(event_details.get("police_station"), "nearest traffic station")
     corridor = _fmt(event_details.get("corridor"), "local corridor")
-    avg_clearance = pattern.get("avg_clearance_time_mins") or "not enough historical"
-    same_corridor = causal_context.get("same_corridor_matches", 0)
     matches = pattern.get("total_similar_events_found", 0)
+    same_corridor = match_context.get("same_corridor_matches", 0)
     complications = pattern.get("known_complications", [])[:2]
 
     node_lines = []
-    for node in top_nodes:
-        impact = int(round(node.get("causal_impact_probability", 0) * 100))
+    for node in blast_radius.get("affected_nodes", [])[:5]:
+        impact = int(round(node.get("relative_impact_score", 0) * 100))
         node_lines.append(
-            f"- {node.get('junction', 'Adjacent junction')}: {impact}% impact probability, "
-            f"spillover in {node.get('estimated_time_to_impact_mins', 0)} minutes"
+            f"- {node.get('junction', 'Adjacent junction')}: {impact}% impact, "
+            f"spillover in ~{node.get('estimated_time_to_impact_mins', 0)} min"
         )
     if not node_lines:
-        node_lines.append("- No connected junctions crossed the critical impact threshold.")
+        node_lines.append("- No connected junctions crossed the impact threshold.")
 
-    first_junction = priority_junctions[0] if priority_junctions else location
-    second_junction = priority_junctions[1] if len(priority_junctions) > 1 else corridor
-    third_junction = priority_junctions[2] if len(priority_junctions) > 2 else "the nearest parallel corridor"
+    manpower_lines = [f"- {b['factor'].replace('_', ' ')}: +{b['units']}" for b in manpower.get("breakdown", [])]
+    manpower_text = "\n".join(manpower_lines) if manpower_lines else f"- {units} units (baseline)"
 
-    complications_text = (
-        "\n".join(f"- {item}" for item in complications)
-        if complications
-        else "- No recurring hidden complication surfaced in the top matches."
+    diversion_text = "\n".join(
+        f"- Divert toward {d.get('to')} via {' -> '.join(d.get('via', [])[:4])} (~{d.get('distance_km')} km, approximate)"
+        for d in diversion_routes[:2]
+    ) or "- No clear alternate route on the incident graph; hold and meter at source."
+
+    pred_band = (
+        f"{predicted.get('median_mins','?')} min (band {predicted.get('range_mins',['?','?'])[0]}-"
+        f"{predicted.get('range_mins',['?','?'])[1]}, confidence {predicted.get('confidence','low')})"
     )
+    actual_line = ""
+    if predicted.get("actual_mins") is not None:
+        actual_line = f"\n- Actual clearance for this event: {predicted['actual_mins']} min (predicted-vs-actual)"
 
-    return f"""## ALERT: {event_type} {event_cause} at {location}
+    header = "PRE-EVENT DEPLOYMENT PLAN" if is_forecast else "INCIDENT RESPONSE"
+    verb = "Stage ahead of the event" if is_forecast else "Deploy now"
+    barricade_verb = "Pre-position barricades at" if is_forecast else "Barricade"
 
-**Priority:** {priority} | **Severity:** {severity}/10 | **Commander view:** prescriptive deployment, not passive monitoring
+    return f"""## {header}: {event_type} {event_cause} at {location}
 
-### Situation Assessment
-The reported {event_cause.lower()} is anchored near {location} on {corridor}. The spatial-causal engine predicts {blast_radius.get('total_affected_junctions', 0)} affected junctions inside a {blast_radius.get('max_radius_km', 0)} km blast radius.
+**Priority:** {priority} | **Severity:** {severity}/10 | **Mode:** {mode}
 
-### Blast Radius
+### Situation
+{event_cause} anchored near {location} on {corridor}. Spatial engine projects {blast_radius.get('total_affected_junctions', 0)} affected junctions ({blast_radius.get('critical_junctions', 0)} critical) within {blast_radius.get('max_radius_km', 0)} km.
+
+### Projected spillover
 {chr(10).join(node_lines)}
 
-### Historical Intelligence
-The RAG core found {matches} causally similar incidents, including {same_corridor} same-corridor matches. Average clearance for the retrieved pattern is {avg_clearance} minutes.
-{complications_text}
+### Historical intelligence
+{matches} similar past events ({same_corridor} same-corridor). Predicted clearance: {pred_band}.{actual_line}
+{chr(10).join(f"- Watch: {c}" for c in complications) if complications else "- No recurring complication surfaced."}
 
-### Deployment Order
-1. **Deploy** {units} ASTraM units: 2 to {location}, then split remaining units across {", ".join(priority_junctions[:3]) or second_junction}.
-2. **Hold** {first_junction} immediately to stop queue spillback at the highest-probability node.
-3. **Divert** excess flow toward {third_junction}; keep {second_junction} open for emergency and towing access.
-4. **Alert** {station} for barricade support and clearance coordination.
+### Deployment order ({units} units)
+{manpower_text}
+1. **{verb}**: {units} units — concentrate at {", ".join(priority_junctions[:3]) or location}.
+2. **{barricade_verb}**: {", ".join(barricade_points) or location} to stop inflow at the highest-impact nodes.
+{diversion_text}
+3. **Alert** {station} for barricade support and clearance coordination.
 
-### Counterfactual
-- Without intervention: {counterfactual.get('without_intervention_mins', 'unknown')} minutes
-- With this deployment: {counterfactual.get('with_intervention_mins', 'unknown')} minutes
-- Estimated time saved: {counterfactual.get('time_saved_mins', 'unknown')} minutes
+### Counterfactual (heuristic)
+- Without intervention: {counterfactual.get('without_intervention_mins', '?')} min
+- With this deployment: {counterfactual.get('with_intervention_mins', '?')} min
+- Estimated time saved: {counterfactual.get('time_saved_mins', '?')} min
 
-*ASTraM Nexus deterministic command fallback | Confidence: HIGH when spatial and RAG agents complete*
+*ASTraM Nexus deterministic command | manpower is a documented heuristic (no deployment ground truth)*
 """
 
 
-SYSTEM_PROMPT = """You are ASTraM Nexus Command AI — the autonomous command center for Bengaluru Traffic Police.
+SYSTEM_PROMPT = """You are ASTraM Nexus Command AI for the Bengaluru Traffic Police.
 
 You receive two intelligence reports:
-1. SPATIAL-CAUSAL ANALYSIS: Mathematical blast radius computation showing which junctions will be impacted, with causal probabilities and time estimates.
-2. HISTORICAL RAG INTELLIGENCE: Past similar events at same/nearby locations, clearance times, known complications.
+1. SPATIAL ANALYSIS: a distance-decay propagation estimate of which junctions will be impacted (this is a heuristic, not causal proof).
+2. HISTORICAL INTELLIGENCE: similar past events, clearance bands, known complications.
 
-Your job: Generate a SINGLE prescriptive operational command for the Traffic Commander.
+Generate ONE prescriptive command for the Traffic Commander, in markdown.
 
-FORMAT YOUR RESPONSE EXACTLY LIKE THIS (use markdown):
+If MODE is "forecast": write a PRE-EVENT DEPLOYMENT PLAN (stage units ahead, pre-position barricades, set advance diversions before the event starts).
+If MODE is "reactive": write an INCIDENT RESPONSE (deploy now, clear the active incident).
 
-## ⚠️ ALERT: [Event Type] at [Location]
+Use this structure:
+## [PRE-EVENT DEPLOYMENT PLAN | INCIDENT RESPONSE]: [Event] at [Junction]
+**Priority:** ... | **Severity:** x/10
 
-**Severity:** [CRITICAL/HIGH/MODERATE] | **Priority:** [Immediate/Urgent/Standard]
+### Situation
+[2-3 sentences referencing exact junction/corridor names.]
 
----
+### Projected spillover
+[Top 3-5 affected junctions with impact % and time-to-impact.]
 
-### 📍 Situation Assessment
-[2-3 sentences: What happened, where, and immediate impact. Reference the causal analysis data. Use exact junction names.]
+### Historical intelligence
+[Clearance band (state it is a band, not a point), known complications, same-corridor count.]
 
-### 🔴 Blast Radius — Causal Impact Chain
-[List the top 3-5 affected junctions with their impact probability and estimated time to impact. Format as a clear cascade chain showing cause→effect.]
+### Deployment order ([N] units)
+[Cite the manpower breakdown. Numbered actions: stage/deploy units at named junctions; pre-position/place barricades; set diversion via the named route (note it is approximate).]
 
-### 📊 Historical Intelligence
-[What the RAG data tells us: average clearance time for similar events, known complications, hidden variables from past incidents. Reference specific past event IDs if available.]
-
-### 🎯 DEPLOYMENT ORDER
-[Specific, numbered action items:]
-1. **DEPLOY** [X] ASTraM units to [specific junction] — [reason]
-2. **BARRICADE** [specific road/junction] — [reason]
-3. **DIVERT** traffic via [specific alternate route] — [reason]
-4. **ALERT** [specific police station] for backup — [reason]
-
-### ⏱️ Counterfactual Analysis
-- **Without intervention:** Estimated clearance in [X] minutes, cascading to [Y] junctions
-- **With this deployment plan:** Estimated clearance in [Z] minutes, saving [W] minutes
-- **Time saved for commuters:** ~[estimate] person-hours
-
----
-*ASTraM Nexus v1.0 | Causal AI Engine | Confidence: [HIGH/MEDIUM]*
+### Counterfactual (heuristic)
+[Without vs with intervention minutes, time saved — label as heuristic.]
 
 RULES:
-- Use EXACT junction names from the data (e.g., "SilkBoardJunc", "MekhriCircle")
-- Use EXACT corridor names (e.g., "ORR East 1", "Bellary Road 1")
-- Reference specific past event IDs when available (e.g., "FKID000123")
-- Be specific about unit counts (derive from severity and blast radius)
-- Include time estimates in minutes
-- If description contains Kannada text, translate the key operational details
-- Sound authoritative and precise — this is a military-grade command, not a suggestion
-- Keep it concise. Maximum 400 words.
+- Use EXACT junction/corridor names from the data.
+- Manpower is a documented heuristic (no deployment ground truth) — do not present it as learned/optimal.
+- Clearance is a planning band, not a precise prediction.
+- If description has Kannada text, translate key operational details.
+- Be precise and authoritative. Max 380 words.
+"""
+
+
+def _briefing(spatial_data: dict, rag_data: dict, mode: str) -> str:
+    deployment = spatial_data.get("deployment_recommendation", {}) or {}
+    return f"""MODE: {mode}
+
+=== SPATIAL ANALYSIS (Agent 1) ===
+Event: {spatial_data.get('event_id')} | {spatial_data.get('event_type')} / {spatial_data.get('event_cause')} | Severity {spatial_data.get('severity_score')}/10
+Epicenter: {json.dumps(spatial_data.get('epicenter', {}))}
+Affected junctions: {spatial_data.get('blast_radius', {}).get('total_affected_junctions', 0)} ({spatial_data.get('blast_radius', {}).get('critical_junctions', 0)} critical)
+Top nodes: {json.dumps(spatial_data.get('blast_radius', {}).get('affected_nodes', [])[:5])}
+Manpower (heuristic): {json.dumps(deployment.get('manpower', {}))}
+Priority junctions: {json.dumps(deployment.get('priority_junctions', []))}
+Barricade points: {json.dumps(deployment.get('barricade_points', []))}
+Diversion routes (approximate): {json.dumps(deployment.get('diversion_routes', []))}
+Predicted clearance (band): {json.dumps(spatial_data.get('predicted_clearance', {}))}
+Counterfactual (heuristic): {json.dumps(spatial_data.get('counterfactual', {}))}
+Road-closure contrast (confounded): {json.dumps(spatial_data.get('road_closure_contrast', {}))}
+Affected corridors: {spatial_data.get('affected_corridors', [])}
+Description: {spatial_data.get('event_details', {}).get('description', '')}
+Police station: {spatial_data.get('event_details', {}).get('police_station', '')}
+
+=== HISTORICAL INTELLIGENCE (Agent 2) ===
+Method: {rag_data.get('retrieval_method', 'retrieval')}
+Similar events: {rag_data.get('pattern_analysis', {}).get('total_similar_events_found', 0)}
+Clearance (avg/median): {rag_data.get('pattern_analysis', {}).get('avg_clearance_time_mins')} / {rag_data.get('pattern_analysis', {}).get('median_clearance_time_mins')} min
+Complications: {json.dumps(rag_data.get('pattern_analysis', {}).get('known_complications', []))}
+Context: {json.dumps(rag_data.get('match_context', {}))}
+Top matches: {json.dumps(rag_data.get('historical_matches', [])[:3])}
+
+=== GENERATE THE COMMAND NOW ===
 """
 
 
@@ -179,61 +213,12 @@ async def synthesize_command(
     spatial_data: dict,
     rag_data: dict,
     stream: bool = True,
+    mode: str = "reactive",
 ) -> AsyncGenerator[str, None]:
-    """
-    Generate prescriptive command by synthesizing spatial + RAG intelligence.
-    Yields chunks for SSE streaming.
-    """
-    # Build the intelligence briefing for Gemini
-    prompt = f"""INTELLIGENCE BRIEFING FOR COMMAND SYNTHESIS:
-
-=== SPATIAL-CAUSAL ANALYSIS (Agent 1) ===
-Event ID: {spatial_data.get('event_id')}
-Event Type: {spatial_data.get('event_type')} — Cause: {spatial_data.get('event_cause')}
-Severity Score: {spatial_data.get('severity_score')}/10
-
-Epicenter: {json.dumps(spatial_data.get('epicenter', {}), indent=2)}
-
-Blast Radius: {spatial_data.get('blast_radius', {}).get('total_affected_junctions', 0)} junctions affected
-Critical Junctions (P(impact) > 0.4): {json.dumps(spatial_data.get('deployment_recommendation', {}).get('priority_junctions', []))}
-
-Top Affected Nodes:
-{json.dumps(spatial_data.get('blast_radius', {}).get('affected_nodes', [])[:5], indent=2)}
-
-Counterfactual:
-- Without intervention: {spatial_data.get('counterfactual', {}).get('without_intervention_mins')} mins
-- With intervention: {spatial_data.get('counterfactual', {}).get('with_intervention_mins')} mins
-- Recommended ASTraM units: {spatial_data.get('deployment_recommendation', {}).get('astram_units_needed')}
-
-Affected Corridors: {spatial_data.get('affected_corridors', [])}
-Event Description: {spatial_data.get('event_details', {}).get('description', '')}
-Police Station: {spatial_data.get('event_details', {}).get('police_station', '')}
-Road Closure Required: {spatial_data.get('event_details', {}).get('requires_road_closure', False)}
-
-=== HISTORICAL RAG INTELLIGENCE (Agent 2) ===
-Retrieval Method: {rag_data.get('retrieval_method', 'CDF-RAG')}
-Total Similar Events Found: {rag_data.get('pattern_analysis', {}).get('total_similar_events_found', 0)}
-
-Clearance Time Stats:
-- Average: {rag_data.get('pattern_analysis', {}).get('avg_clearance_time_mins')} mins
-- Median: {rag_data.get('pattern_analysis', {}).get('median_clearance_time_mins')} mins
-
-Known Complications: {json.dumps(rag_data.get('pattern_analysis', {}).get('known_complications', []))}
-Cause Distribution: {json.dumps(rag_data.get('pattern_analysis', {}).get('cause_distribution', {}))}
-
-Causal Context:
-- Same junction matches: {rag_data.get('causal_context', {}).get('same_junction_matches', 0)}
-- Same corridor matches: {rag_data.get('causal_context', {}).get('same_corridor_matches', 0)}
-
-Top Historical Matches:
-{json.dumps(rag_data.get('historical_matches', [])[:3], indent=2)}
-
-=== GENERATE COMMAND NOW ===
-"""
-
+    """Generate a prescriptive command; yields chunks for SSE streaming."""
     model = _get_model()
     if model is None:
-        fallback = _fallback_command(spatial_data, rag_data)
+        fallback = _fallback_command(spatial_data, rag_data, mode)
         if stream:
             for i in range(0, len(fallback), 180):
                 yield fallback[i : i + 180]
@@ -241,63 +226,34 @@ Top Historical Matches:
             yield fallback
         return
 
-    if stream:
-        try:
-            response = model.generate_content(
-                [
-                    {"role": "user", "parts": [SYSTEM_PROMPT + "\n\n" + prompt]},
-                ],
-                stream=True,
-            )
-            for chunk in response:
+    client, model_name = model
+    prompt = SYSTEM_PROMPT + "\n\n" + _briefing(spatial_data, rag_data, mode)
+    try:
+        if stream:
+            for chunk in client.models.generate_content_stream(model=model_name, contents=prompt):
                 if chunk.text:
                     yield chunk.text
-        except Exception:
-            fallback = _fallback_command(spatial_data, rag_data)
+        else:
+            response = client.models.generate_content(model=model_name, contents=prompt)
+            yield response.text
+    except Exception:
+        fallback = _fallback_command(spatial_data, rag_data, mode)
+        if stream:
             for i in range(0, len(fallback), 180):
                 yield fallback[i : i + 180]
-    else:
-        try:
-            response = model.generate_content(
-                [
-                    {"role": "user", "parts": [SYSTEM_PROMPT + "\n\n" + prompt]},
-                ],
-            )
-            yield response.text
-        except Exception:
-            yield _fallback_command(spatial_data, rag_data)
+        else:
+            yield fallback
 
 
-def synthesize_command_sync(spatial_data: dict, rag_data: dict) -> str:
+def synthesize_command_sync(spatial_data: dict, rag_data: dict, mode: str = "reactive") -> str:
     """Non-streaming version for testing."""
     model = _get_model()
     if model is None:
-        return _fallback_command(spatial_data, rag_data)
-
-    prompt = f"""INTELLIGENCE BRIEFING FOR COMMAND SYNTHESIS:
-
-=== SPATIAL-CAUSAL ANALYSIS (Agent 1) ===
-Event: {spatial_data.get('event_id')} | Type: {spatial_data.get('event_cause')} | Severity: {spatial_data.get('severity_score')}/10
-Epicenter: {spatial_data.get('epicenter', {}).get('nearest_junction', 'Unknown')}
-Blast Radius: {spatial_data.get('blast_radius', {}).get('total_affected_junctions', 0)} junctions
-Priority Junctions: {spatial_data.get('deployment_recommendation', {}).get('priority_junctions', [])}
-Without intervention: {spatial_data.get('counterfactual', {}).get('without_intervention_mins')} mins
-With intervention: {spatial_data.get('counterfactual', {}).get('with_intervention_mins')} mins
-Units needed: {spatial_data.get('deployment_recommendation', {}).get('astram_units_needed')}
-Description: {spatial_data.get('event_details', {}).get('description', '')}
-
-=== HISTORICAL RAG INTELLIGENCE (Agent 2) ===
-Similar events: {rag_data.get('pattern_analysis', {}).get('total_similar_events_found', 0)}
-Avg clearance: {rag_data.get('pattern_analysis', {}).get('avg_clearance_time_mins')} mins
-Complications: {rag_data.get('pattern_analysis', {}).get('known_complications', [])}
-
-=== GENERATE COMMAND ===
-"""
-
+        return _fallback_command(spatial_data, rag_data, mode)
     try:
-        response = model.generate_content(
-            [{"role": "user", "parts": [SYSTEM_PROMPT + "\n\n" + prompt]}],
-        )
+        client, model_name = model
+        prompt = SYSTEM_PROMPT + "\n\n" + _briefing(spatial_data, rag_data, mode)
+        response = client.models.generate_content(model=model_name, contents=prompt)
         return response.text
     except Exception:
-        return _fallback_command(spatial_data, rag_data)
+        return _fallback_command(spatial_data, rag_data, mode)

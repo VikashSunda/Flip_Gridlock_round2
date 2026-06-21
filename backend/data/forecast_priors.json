@@ -1,0 +1,2111 @@
+{
+  "meta": {
+    "hourly_weights_basis": "event volume per UTC hour, normalized to mean 1.0",
+    "timezone_note": "start_datetime is +00 (UTC); weights are empirical so label-agnostic",
+    "clearance_caveat": "closure_true vs closure_false is confounded; n provided for confidence"
+  },
+  "hourly_weights": {
+    "0": 1.237,
+    "1": 1.125,
+    "2": 1.16,
+    "3": 1.099,
+    "4": 1.645,
+    "5": 1.942,
+    "6": 1.945,
+    "7": 1.413,
+    "8": 0.969,
+    "9": 0.473,
+    "10": 0.2,
+    "11": 0.203,
+    "12": 0.253,
+    "13": 0.097,
+    "14": 0.044,
+    "15": 0.026,
+    "16": 0.026,
+    "17": 0.12,
+    "18": 0.687,
+    "19": 1.716,
+    "20": 2.012,
+    "21": 2.397,
+    "22": 1.73,
+    "23": 1.481
+  },
+  "clearance_priors": {
+    "global": {
+      "n": 2786,
+      "median": 52.7,
+      "mean": 516.1,
+      "closure_true_median": 72.3,
+      "n_true": 219,
+      "closure_false_median": 51.1,
+      "n_false": 2567
+    },
+    "by_cause": {
+      "vehicle_breakdown": {
+        "n": 1841,
+        "median": 41.1,
+        "mean": 51.0,
+        "closure_true_median": 35.2,
+        "n_true": 80,
+        "closure_false_median": 41.4,
+        "n_false": 1761
+      },
+      "others": {
+        "n": 312,
+        "median": 111.5,
+        "mean": 1150.5,
+        "closure_true_median": 66.0,
+        "n_true": 24,
+        "closure_false_median": 120.8,
+        "n_false": 288
+      },
+      "tree_fall": {
+        "n": 142,
+        "median": 217.8,
+        "mean": 1330.9,
+        "closure_true_median": 174.0,
+        "n_true": 61,
+        "closure_false_median": 321.2,
+        "n_false": 81
+      },
+      "accident": {
+        "n": 91,
+        "median": 41.4,
+        "mean": 48.4,
+        "closure_true_median": 56.8,
+        "n_true": 4,
+        "closure_false_median": 41.4,
+        "n_false": 87
+      },
+      "public_event": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging": {
+        "n": 164,
+        "median": 790.0,
+        "mean": 2134.0,
+        "closure_true_median": 163.8,
+        "n_true": 16,
+        "closure_false_median": 844.2,
+        "n_false": 148
+      },
+      "pot_holes": {
+        "n": 70,
+        "median": 1489.7,
+        "mean": 2477.3,
+        "closure_true_median": 226.3,
+        "n_true": 5,
+        "closure_false_median": 1510.6,
+        "n_false": 65
+      },
+      "congestion": {
+        "n": 22,
+        "median": 71.6,
+        "mean": 74.7,
+        "closure_true_median": 27.6,
+        "n_true": 2,
+        "closure_false_median": 77.2,
+        "n_false": 20
+      },
+      "construction": {
+        "n": 82,
+        "median": 455.8,
+        "mean": 2043.6,
+        "closure_true_median": 487.3,
+        "n_true": 19,
+        "closure_false_median": 419.1,
+        "n_false": 63
+      },
+      "road_conditions": {
+        "n": 46,
+        "median": 756.0,
+        "mean": 2135.6,
+        "closure_true_median": 288.8,
+        "n_true": 5,
+        "closure_false_median": 774.0,
+        "n_false": 41
+      },
+      "vip_movement": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "procession": {
+        "n": 13,
+        "median": 36.5,
+        "mean": 54.5,
+        "closure_true_median": 6.6,
+        "n_true": 3,
+        "closure_false_median": 47.4,
+        "n_false": 10
+      },
+      "protest": {
+        "n": 3,
+        "median": 30.7,
+        "mean": 28.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 30.7,
+        "n_false": 3
+      },
+      "Debris": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "Fog / Low Visibility": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "debris": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      }
+    },
+    "by_supertype": {
+      "vehicle_breakdown": {
+        "n": 1841,
+        "median": 41.1,
+        "mean": 51.0,
+        "closure_true_median": 35.2,
+        "n_true": 80,
+        "closure_false_median": 41.4,
+        "n_false": 1761
+      },
+      "others": {
+        "n": 312,
+        "median": 111.5,
+        "mean": 1150.5,
+        "closure_true_median": 66.0,
+        "n_true": 24,
+        "closure_false_median": 120.8,
+        "n_false": 288
+      },
+      "weather_hazard": {
+        "n": 306,
+        "median": 297.0,
+        "mean": 1761.3,
+        "closure_true_median": 174.0,
+        "n_true": 77,
+        "closure_false_median": 625.2,
+        "n_false": 229
+      },
+      "accident": {
+        "n": 91,
+        "median": 41.4,
+        "mean": 48.4,
+        "closure_true_median": 56.8,
+        "n_true": 4,
+        "closure_false_median": 41.4,
+        "n_false": 87
+      },
+      "gathering": {
+        "n": 16,
+        "median": 34.5,
+        "mean": 49.7,
+        "closure_true_median": 6.6,
+        "n_true": 3,
+        "closure_false_median": 36.5,
+        "n_false": 13
+      },
+      "roadworks": {
+        "n": 198,
+        "median": 1080.4,
+        "mean": 2218.3,
+        "closure_true_median": 426.6,
+        "n_true": 29,
+        "closure_false_median": 1311.7,
+        "n_false": 169
+      },
+      "congestion": {
+        "n": 22,
+        "median": 71.6,
+        "mean": 74.7,
+        "closure_true_median": 27.6,
+        "n_true": 2,
+        "closure_false_median": 77.2,
+        "n_false": 20
+      }
+    },
+    "by_cause_corridor": {
+      "vehicle_breakdown|Tumkur Road": {
+        "n": 183,
+        "median": 30.7,
+        "mean": 43.9,
+        "closure_true_median": 17.1,
+        "n_true": 4,
+        "closure_false_median": 31.9,
+        "n_false": 179
+      },
+      "vehicle_breakdown|ORR East 1": {
+        "n": 60,
+        "median": 39.6,
+        "mean": 66.2,
+        "closure_true_median": 21.6,
+        "n_true": 1,
+        "closure_false_median": 39.9,
+        "n_false": 59
+      },
+      "public_event|CBD 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|ORR East 2": {
+        "n": 3,
+        "median": 9348.3,
+        "mean": 6373.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 9348.3,
+        "n_false": 3
+      },
+      "vehicle_breakdown|ORR West 1": {
+        "n": 48,
+        "median": 50.6,
+        "mean": 57.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 50.6,
+        "n_false": 48
+      },
+      "others|ORR North 1": {
+        "n": 2,
+        "median": 33.0,
+        "mean": 33.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 33.0,
+        "n_false": 2
+      },
+      "pot_holes|Old Madras Road": {
+        "n": 2,
+        "median": 6841.0,
+        "mean": 6841.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 6841.0,
+        "n_false": 2
+      },
+      "others|Bellary Road 2": {
+        "n": 17,
+        "median": 1369.9,
+        "mean": 1440.9,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1369.9,
+        "n_false": 17
+      },
+      "vehicle_breakdown|Bellary Road 1": {
+        "n": 146,
+        "median": 36.8,
+        "mean": 51.5,
+        "closure_true_median": 37.0,
+        "n_true": 4,
+        "closure_false_median": 36.6,
+        "n_false": 142
+      },
+      "vehicle_breakdown|Hosur Road": {
+        "n": 72,
+        "median": 49.0,
+        "mean": 54.6,
+        "closure_true_median": 94.5,
+        "n_true": 2,
+        "closure_false_median": 47.9,
+        "n_false": 70
+      },
+      "pot_holes|NULL": {
+        "n": 2,
+        "median": 3243.6,
+        "mean": 3243.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 3243.6,
+        "n_false": 2
+      },
+      "vehicle_breakdown|Bannerghata Road": {
+        "n": 29,
+        "median": 34.2,
+        "mean": 50.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 34.2,
+        "n_false": 29
+      },
+      "congestion|ORR North 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "vehicle_breakdown|Magadi Road": {
+        "n": 76,
+        "median": 45.2,
+        "mean": 53.1,
+        "closure_true_median": 71.8,
+        "n_true": 2,
+        "closure_false_median": 43.8,
+        "n_false": 74
+      },
+      "construction|ORR East 1": {
+        "n": 2,
+        "median": 1930.8,
+        "mean": 1930.8,
+        "closure_true_median": 1930.8,
+        "n_true": 2,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "others|Bellary Road 1": {
+        "n": 26,
+        "median": 87.6,
+        "mean": 799.5,
+        "closure_true_median": 90.8,
+        "n_true": 2,
+        "closure_false_median": 86.2,
+        "n_false": 24
+      },
+      "others|Tumkur Road": {
+        "n": 13,
+        "median": 425.9,
+        "mean": 1709.1,
+        "closure_true_median": 425.9,
+        "n_true": 1,
+        "closure_false_median": 829.5,
+        "n_false": 12
+      },
+      "tree_fall|Bellary Road 1": {
+        "n": 12,
+        "median": 1119.0,
+        "mean": 959.3,
+        "closure_true_median": 141.6,
+        "n_true": 3,
+        "closure_false_median": 1443.2,
+        "n_false": 9
+      },
+      "congestion|IRR(Thanisandra road)": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "vehicle_breakdown|Mysore Road": {
+        "n": 245,
+        "median": 39.0,
+        "mean": 46.2,
+        "closure_true_median": 33.7,
+        "n_true": 15,
+        "closure_false_median": 39.2,
+        "n_false": 230
+      },
+      "construction|ORR East 2": {
+        "n": 3,
+        "median": 2852.2,
+        "mean": 4017.1,
+        "closure_true_median": 2852.2,
+        "n_true": 1,
+        "closure_false_median": 4599.5,
+        "n_false": 2
+      },
+      "vehicle_breakdown|West of Chord Road": {
+        "n": 31,
+        "median": 35.1,
+        "mean": 43.5,
+        "closure_true_median": 14.5,
+        "n_true": 1,
+        "closure_false_median": 36.7,
+        "n_false": 30
+      },
+      "pot_holes|CBD 1": {
+        "n": 2,
+        "median": 3098.7,
+        "mean": 3098.7,
+        "closure_true_median": 45.1,
+        "n_true": 1,
+        "closure_false_median": 6152.2,
+        "n_false": 1
+      },
+      "pot_holes|ORR North 1": {
+        "n": 2,
+        "median": 1004.1,
+        "mean": 1004.1,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1004.1,
+        "n_false": 2
+      },
+      "pot_holes|Magadi Road": {
+        "n": 3,
+        "median": 8267.7,
+        "mean": 6088.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 8267.7,
+        "n_false": 3
+      },
+      "others|Mysore Road": {
+        "n": 37,
+        "median": 140.1,
+        "mean": 1430.4,
+        "closure_true_median": 33.0,
+        "n_true": 6,
+        "closure_false_median": 152.4,
+        "n_false": 31
+      },
+      "vehicle_breakdown|ORR North 1": {
+        "n": 45,
+        "median": 36.7,
+        "mean": 52.7,
+        "closure_true_median": 130.7,
+        "n_true": 1,
+        "closure_false_median": 36.2,
+        "n_false": 44
+      },
+      "water_logging|Mysore Road": {
+        "n": 21,
+        "median": 214.6,
+        "mean": 2161.4,
+        "closure_true_median": 102.5,
+        "n_true": 9,
+        "closure_false_median": 1898.4,
+        "n_false": 12
+      },
+      "others|CBD 2": {
+        "n": 8,
+        "median": 113.3,
+        "mean": 1748.1,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 113.3,
+        "n_false": 8
+      },
+      "tree_fall|Mysore Road": {
+        "n": 4,
+        "median": 1495.6,
+        "mean": 1342.0,
+        "closure_true_median": 1173.6,
+        "n_true": 2,
+        "closure_false_median": 1510.4,
+        "n_false": 2
+      },
+      "pot_holes|Bannerghata Road": {
+        "n": 2,
+        "median": 2891.2,
+        "mean": 2891.2,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2891.2,
+        "n_false": 2
+      },
+      "water_logging|West of Chord Road": {
+        "n": 2,
+        "median": 3986.8,
+        "mean": 3986.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 3986.8,
+        "n_false": 2
+      },
+      "pot_holes|ORR East 1": {
+        "n": 4,
+        "median": 1368.1,
+        "mean": 2061.5,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1368.1,
+        "n_false": 4
+      },
+      "construction|Bellary Road 1": {
+        "n": 4,
+        "median": 3927.5,
+        "mean": 4369.1,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 3927.5,
+        "n_false": 4
+      },
+      "water_logging|Old Madras Road": {
+        "n": 7,
+        "median": 48.4,
+        "mean": 927.1,
+        "closure_true_median": 201.8,
+        "n_true": 1,
+        "closure_false_median": 42.5,
+        "n_false": 6
+      },
+      "accident|Tumkur Road": {
+        "n": 9,
+        "median": 37.8,
+        "mean": 39.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 37.8,
+        "n_false": 9
+      },
+      "vehicle_breakdown|Bellary Road 2": {
+        "n": 82,
+        "median": 44.7,
+        "mean": 53.7,
+        "closure_true_median": 51.4,
+        "n_true": 2,
+        "closure_false_median": 44.7,
+        "n_false": 80
+      },
+      "others|ORR North 2": {
+        "n": 16,
+        "median": 100.6,
+        "mean": 1066.5,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 100.6,
+        "n_false": 16
+      },
+      "water_logging|ORR East 1": {
+        "n": 9,
+        "median": 2880.9,
+        "mean": 3509.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2880.9,
+        "n_false": 9
+      },
+      "road_conditions|ORR West 1": {
+        "n": 2,
+        "median": 813.5,
+        "mean": 813.5,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 813.5,
+        "n_false": 2
+      },
+      "construction|Old Madras Road": {
+        "n": 2,
+        "median": 89.4,
+        "mean": 89.4,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 89.4,
+        "n_false": 2
+      },
+      "construction|Bellary Road 2": {
+        "n": 8,
+        "median": 97.4,
+        "mean": 286.1,
+        "closure_true_median": 487.3,
+        "n_true": 1,
+        "closure_false_median": 60.8,
+        "n_false": 7
+      },
+      "vehicle_breakdown|Old Airport Road": {
+        "n": 23,
+        "median": 40.8,
+        "mean": 52.5,
+        "closure_true_median": 14.2,
+        "n_true": 1,
+        "closure_false_median": 52.1,
+        "n_false": 22
+      },
+      "road_conditions|CBD 2": {
+        "n": 2,
+        "median": 2455.8,
+        "mean": 2455.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2455.8,
+        "n_false": 2
+      },
+      "others|Bannerghata Road": {
+        "n": 2,
+        "median": 74.0,
+        "mean": 74.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 74.0,
+        "n_false": 2
+      },
+      "vehicle_breakdown|ORR North 2": {
+        "n": 50,
+        "median": 41.8,
+        "mean": 51.4,
+        "closure_true_median": 54.7,
+        "n_true": 2,
+        "closure_false_median": 39.2,
+        "n_false": 48
+      },
+      "others|Magadi Road": {
+        "n": 16,
+        "median": 85.2,
+        "mean": 1045.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 85.2,
+        "n_false": 16
+      },
+      "vehicle_breakdown|Old Madras Road": {
+        "n": 45,
+        "median": 35.6,
+        "mean": 41.1,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 35.6,
+        "n_false": 45
+      },
+      "others|Hennur Main Road": {
+        "n": 5,
+        "median": 4156.2,
+        "mean": 3858.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 4156.2,
+        "n_false": 5
+      },
+      "construction|Mysore Road": {
+        "n": 2,
+        "median": 879.1,
+        "mean": 879.1,
+        "closure_true_median": 428.8,
+        "n_true": 1,
+        "closure_false_median": 1329.5,
+        "n_false": 1
+      },
+      "vip_movement|Mysore Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "congestion|Magadi Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|Old Airport Road": {
+        "n": 1,
+        "median": 93.4,
+        "mean": 93.4,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 93.4,
+        "n_false": 1
+      },
+      "accident|Bellary Road 2": {
+        "n": 16,
+        "median": 35.3,
+        "mean": 42.3,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 35.3,
+        "n_false": 16
+      },
+      "accident|Bellary Road 1": {
+        "n": 6,
+        "median": 49.8,
+        "mean": 53.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 49.8,
+        "n_false": 6
+      },
+      "accident|Old Airport Road": {
+        "n": 1,
+        "median": 36.0,
+        "mean": 36.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 36.0,
+        "n_false": 1
+      },
+      "vehicle_breakdown|ORR East 2": {
+        "n": 22,
+        "median": 31.5,
+        "mean": 44.1,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 31.5,
+        "n_false": 22
+      },
+      "tree_fall|Old Madras Road": {
+        "n": 1,
+        "median": 54.2,
+        "mean": 54.2,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 54.2,
+        "n_false": 1
+      },
+      "water_logging|ORR West 1": {
+        "n": 7,
+        "median": 1218.7,
+        "mean": 1949.5,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1218.7,
+        "n_false": 7
+      },
+      "accident|ORR East 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "construction|ORR North 1": {
+        "n": 8,
+        "median": 367.9,
+        "mean": 849.6,
+        "closure_true_median": 84.5,
+        "n_true": 1,
+        "closure_false_median": 410.1,
+        "n_false": 7
+      },
+      "vehicle_breakdown|Airport New South Road": {
+        "n": 8,
+        "median": 59.6,
+        "mean": 64.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 59.6,
+        "n_false": 8
+      },
+      "pot_holes|West of Chord Road": {
+        "n": 1,
+        "median": 27.7,
+        "mean": 27.7,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 27.7,
+        "n_false": 1
+      },
+      "water_logging|Bannerghata Road": {
+        "n": 8,
+        "median": 2491.3,
+        "mean": 3904.9,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2491.3,
+        "n_false": 8
+      },
+      "tree_fall|ORR West 1": {
+        "n": 3,
+        "median": 72.6,
+        "mean": 255.9,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 72.6,
+        "n_false": 3
+      },
+      "others|ORR East 2": {
+        "n": 5,
+        "median": 91.7,
+        "mean": 205.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 91.7,
+        "n_false": 5
+      },
+      "construction|Varthur Road": {
+        "n": 1,
+        "median": 2871.8,
+        "mean": 2871.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2871.8,
+        "n_false": 1
+      },
+      "tree_fall|Hosur Road": {
+        "n": 2,
+        "median": 2822.0,
+        "mean": 2822.0,
+        "closure_true_median": 5581.9,
+        "n_true": 1,
+        "closure_false_median": 62.2,
+        "n_false": 1
+      },
+      "accident|Old Madras Road": {
+        "n": 3,
+        "median": 41.6,
+        "mean": 44.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 41.6,
+        "n_false": 3
+      },
+      "vehicle_breakdown|Varthur Road": {
+        "n": 23,
+        "median": 46.9,
+        "mean": 55.9,
+        "closure_true_median": 39.0,
+        "n_true": 1,
+        "closure_false_median": 48.8,
+        "n_false": 22
+      },
+      "public_event|ORR East 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "congestion|Hennur Main Road": {
+        "n": 8,
+        "median": 102.7,
+        "mean": 101.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 102.7,
+        "n_false": 8
+      },
+      "construction|Hennur Main Road": {
+        "n": 2,
+        "median": 2445.6,
+        "mean": 2445.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2445.6,
+        "n_false": 2
+      },
+      "road_conditions|Bellary Road 1": {
+        "n": 8,
+        "median": 285.8,
+        "mean": 2234.6,
+        "closure_true_median": 288.8,
+        "n_true": 1,
+        "closure_false_median": 282.7,
+        "n_false": 7
+      },
+      "water_logging|IRR(Thanisandra road)": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "construction|ORR West 1": {
+        "n": 1,
+        "median": 18.7,
+        "mean": 18.7,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 18.7,
+        "n_false": 1
+      },
+      "water_logging|CBD 2": {
+        "n": 1,
+        "median": 1397.6,
+        "mean": 1397.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1397.6,
+        "n_false": 1
+      },
+      "road_conditions|Bannerghata Road": {
+        "n": 1,
+        "median": 41.3,
+        "mean": 41.3,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 41.3,
+        "n_false": 1
+      },
+      "vehicle_breakdown|CBD 2": {
+        "n": 20,
+        "median": 57.0,
+        "mean": 54.7,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 57.0,
+        "n_false": 20
+      },
+      "road_conditions|Mysore Road": {
+        "n": 2,
+        "median": 1747.0,
+        "mean": 1747.0,
+        "closure_true_median": 3223.2,
+        "n_true": 1,
+        "closure_false_median": 270.9,
+        "n_false": 1
+      },
+      "construction|IRR(Thanisandra road)": {
+        "n": 1,
+        "median": 64.2,
+        "mean": 64.2,
+        "closure_true_median": 64.2,
+        "n_true": 1,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "vehicle_breakdown|Hennur Main Road": {
+        "n": 9,
+        "median": 50.4,
+        "mean": 56.3,
+        "closure_true_median": 31.5,
+        "n_true": 1,
+        "closure_false_median": 53.3,
+        "n_false": 8
+      },
+      "others|Old Madras Road": {
+        "n": 7,
+        "median": 75.9,
+        "mean": 149.4,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 75.9,
+        "n_false": 7
+      },
+      "pot_holes|CBD 2": {
+        "n": 1,
+        "median": 1.5,
+        "mean": 1.5,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1.5,
+        "n_false": 1
+      },
+      "pot_holes|ORR West 1": {
+        "n": 1,
+        "median": 109.3,
+        "mean": 109.3,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 109.3,
+        "n_false": 1
+      },
+      "others|ORR West 1": {
+        "n": 5,
+        "median": 36.4,
+        "mean": 648.4,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 36.4,
+        "n_false": 5
+      },
+      "others|Old Airport Road": {
+        "n": 7,
+        "median": 219.0,
+        "mean": 2499.3,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 219.0,
+        "n_false": 7
+      },
+      "pot_holes|Bellary Road 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "others|Hosur Road": {
+        "n": 9,
+        "median": 286.8,
+        "mean": 448.9,
+        "closure_true_median": 112.1,
+        "n_true": 1,
+        "closure_false_median": 308.5,
+        "n_false": 8
+      },
+      "water_logging|Hosur Road": {
+        "n": 5,
+        "median": 142.6,
+        "mean": 1692.7,
+        "closure_true_median": 5282.5,
+        "n_true": 1,
+        "closure_false_median": 142.6,
+        "n_false": 4
+      },
+      "others|IRR(Thanisandra road)": {
+        "n": 1,
+        "median": 65.1,
+        "mean": 65.1,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 65.1,
+        "n_false": 1
+      },
+      "construction|ORR North 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|Bellary Road 2": {
+        "n": 5,
+        "median": 402.9,
+        "mean": 2448.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 402.9,
+        "n_false": 5
+      },
+      "accident|Hosur Road": {
+        "n": 9,
+        "median": 74.6,
+        "mean": 67.3,
+        "closure_true_median": 74.6,
+        "n_true": 1,
+        "closure_false_median": 71.3,
+        "n_false": 8
+      },
+      "congestion|Old Airport Road": {
+        "n": 1,
+        "median": 1.6,
+        "mean": 1.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1.6,
+        "n_false": 1
+      },
+      "congestion|Mysore Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "congestion|Bellary Road 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "tree_fall|West of Chord Road": {
+        "n": 6,
+        "median": 53.3,
+        "mean": 628.9,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 53.3,
+        "n_false": 6
+      },
+      "construction|Tumkur Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|Varthur Road": {
+        "n": 4,
+        "median": 2910.5,
+        "mean": 2879.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2910.5,
+        "n_false": 4
+      },
+      "accident|ORR East 1": {
+        "n": 4,
+        "median": 35.5,
+        "mean": 38.3,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 35.5,
+        "n_false": 4
+      },
+      "construction|West of Chord Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|ORR North 2": {
+        "n": 2,
+        "median": 1448.5,
+        "mean": 1448.5,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1448.5,
+        "n_false": 2
+      },
+      "water_logging|Hennur Main Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "pot_holes|Bellary Road 1": {
+        "n": 6,
+        "median": 2369.2,
+        "mean": 2947.8,
+        "closure_true_median": 285.1,
+        "n_true": 1,
+        "closure_false_median": 3171.4,
+        "n_false": 5
+      },
+      "accident|Mysore Road": {
+        "n": 3,
+        "median": 39.0,
+        "mean": 49.0,
+        "closure_true_median": 39.0,
+        "n_true": 1,
+        "closure_false_median": 54.0,
+        "n_false": 2
+      },
+      "road_conditions|ORR East 2": {
+        "n": 2,
+        "median": 13.8,
+        "mean": 13.8,
+        "closure_true_median": 1.9,
+        "n_true": 1,
+        "closure_false_median": 25.6,
+        "n_false": 1
+      },
+      "pot_holes|Mysore Road": {
+        "n": 2,
+        "median": 3013.2,
+        "mean": 3013.2,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 3013.2,
+        "n_false": 2
+      },
+      "tree_fall|Bellary Road 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "procession|Hosur Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "pot_holes|Old Airport Road": {
+        "n": 2,
+        "median": 3070.1,
+        "mean": 3070.1,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 3070.1,
+        "n_false": 2
+      },
+      "construction|Old Airport Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|Bellary Road 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "accident|ORR North 1": {
+        "n": 5,
+        "median": 41.4,
+        "mean": 39.9,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 41.4,
+        "n_false": 5
+      },
+      "water_logging|Bellary Road 1": {
+        "n": 11,
+        "median": 167.0,
+        "mean": 1995.3,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 167.0,
+        "n_false": 11
+      },
+      "others|ORR East 1": {
+        "n": 6,
+        "median": 353.1,
+        "mean": 1485.0,
+        "closure_true_median": 24.4,
+        "n_true": 1,
+        "closure_false_median": 606.3,
+        "n_false": 5
+      },
+      "congestion|ORR North 1": {
+        "n": 5,
+        "median": 72.7,
+        "mean": 80.9,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 72.7,
+        "n_false": 5
+      },
+      "pot_holes|ORR North 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "road_conditions|Hosur Road": {
+        "n": 1,
+        "median": 31.4,
+        "mean": 31.4,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 31.4,
+        "n_false": 1
+      },
+      "Fog / Low Visibility|ORR North 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "pot_holes|Varthur Road": {
+        "n": 2,
+        "median": 5213.2,
+        "mean": 5213.2,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 5213.2,
+        "n_false": 2
+      },
+      "road_conditions|Old Airport Road": {
+        "n": 1,
+        "median": 774.0,
+        "mean": 774.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 774.0,
+        "n_false": 1
+      },
+      "pot_holes|Hosur Road": {
+        "n": 1,
+        "median": 1654.9,
+        "mean": 1654.9,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1654.9,
+        "n_false": 1
+      },
+      "accident|ORR West 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "tree_fall|ORR North 1": {
+        "n": 4,
+        "median": 141.6,
+        "mean": 442.8,
+        "closure_true_median": 775.7,
+        "n_true": 2,
+        "closure_false_median": 109.9,
+        "n_false": 2
+      },
+      "road_conditions|Magadi Road": {
+        "n": 2,
+        "median": 3620.2,
+        "mean": 3620.2,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 3620.2,
+        "n_false": 2
+      },
+      "others|West of Chord Road": {
+        "n": 10,
+        "median": 118.3,
+        "mean": 1047.8,
+        "closure_true_median": 109.4,
+        "n_true": 2,
+        "closure_false_median": 118.3,
+        "n_false": 8
+      },
+      "vehicle_breakdown|IRR(Thanisandra road)": {
+        "n": 9,
+        "median": 41.9,
+        "mean": 41.0,
+        "closure_true_median": 51.2,
+        "n_true": 1,
+        "closure_false_median": 31.6,
+        "n_false": 8
+      },
+      "road_conditions|West of Chord Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|Old Madras Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "tree_fall|ORR East 1": {
+        "n": 1,
+        "median": 77.9,
+        "mean": 77.9,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 77.9,
+        "n_false": 1
+      },
+      "congestion|Bannerghata Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "accident|ORR North 2": {
+        "n": 2,
+        "median": 30.7,
+        "mean": 30.7,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 30.7,
+        "n_false": 2
+      },
+      "pot_holes|IRR(Thanisandra road)": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "pot_holes|Airport New South Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "vip_movement|Old Airport Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "vehicle_breakdown|CBD 1": {
+        "n": 5,
+        "median": 44.7,
+        "mean": 37.7,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 44.7,
+        "n_false": 5
+      },
+      "procession|Magadi Road": {
+        "n": 2,
+        "median": 61.1,
+        "mean": 61.1,
+        "closure_true_median": 1.7,
+        "n_true": 1,
+        "closure_false_median": 120.5,
+        "n_false": 1
+      },
+      "protest|Tumkur Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "tree_fall|Bannerghata Road": {
+        "n": 1,
+        "median": 30.0,
+        "mean": 30.0,
+        "closure_true_median": 30.0,
+        "n_true": 1,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "procession|Mysore Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "accident|Airport New South Road": {
+        "n": 1,
+        "median": 68.8,
+        "mean": 68.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 68.8,
+        "n_false": 1
+      },
+      "tree_fall|Airport New South Road": {
+        "n": 2,
+        "median": 37.0,
+        "mean": 37.0,
+        "closure_true_median": 18.3,
+        "n_true": 1,
+        "closure_false_median": 55.8,
+        "n_false": 1
+      },
+      "water_logging|Tumkur Road": {
+        "n": 6,
+        "median": 818.1,
+        "mean": 1429.2,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 818.1,
+        "n_false": 6
+      },
+      "procession|Bannerghata Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "road_conditions|Bellary Road 2": {
+        "n": 1,
+        "median": 58.7,
+        "mean": 58.7,
+        "closure_true_median": 58.7,
+        "n_true": 1,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "procession|Hennur Main Road": {
+        "n": 1,
+        "median": 104.5,
+        "mean": 104.5,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 104.5,
+        "n_false": 1
+      },
+      "others|Varthur Road": {
+        "n": 1,
+        "median": 99.1,
+        "mean": 99.1,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 99.1,
+        "n_false": 1
+      },
+      "tree_fall|Tumkur Road": {
+        "n": 6,
+        "median": 445.8,
+        "mean": 540.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 445.8,
+        "n_false": 6
+      },
+      "tree_fall|CBD 2": {
+        "n": 1,
+        "median": 6519.8,
+        "mean": 6519.8,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 6519.8,
+        "n_false": 1
+      },
+      "accident|West of Chord Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|Old Airport Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|Magadi Road": {
+        "n": 1,
+        "median": 256.1,
+        "mean": 256.1,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 256.1,
+        "n_false": 1
+      },
+      "others|CBD 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "congestion|Tumkur Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "Debris|Bellary Road 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "debris|West of Chord Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "vehicle_breakdown|NULL": {
+        "n": 1,
+        "median": 1.7,
+        "mean": 1.7,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1.7,
+        "n_false": 1
+      },
+      "tree_fall|IRR(Thanisandra road)": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|Hennur Main Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|CBD 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|Airport New South Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|ORR North 1": {
+        "n": 5,
+        "median": 985.0,
+        "mean": 1288.3,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 985.0,
+        "n_false": 5
+      },
+      "pot_holes|Hennur Main Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "tree_fall|Magadi Road": {
+        "n": 2,
+        "median": 50.7,
+        "mean": 50.7,
+        "closure_true_median": 91.4,
+        "n_true": 1,
+        "closure_false_median": 10.0,
+        "n_false": 1
+      },
+      "road_conditions|Hennur Main Road": {
+        "n": 1,
+        "median": 33.7,
+        "mean": 33.7,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 33.7,
+        "n_false": 1
+      },
+      "congestion|ORR West 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "water_logging|NULL": {
+        "n": 1,
+        "median": 1.0,
+        "mean": 1.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1.0,
+        "n_false": 1
+      },
+      "congestion|NULL": {
+        "n": 1,
+        "median": 2.0,
+        "mean": 2.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2.0,
+        "n_false": 1
+      },
+      "road_conditions|IRR(Thanisandra road)": {
+        "n": 1,
+        "median": 226.3,
+        "mean": 226.3,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 226.3,
+        "n_false": 1
+      },
+      "congestion|ORR East 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|Mysore Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "construction|CBD 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "Debris|ORR West 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "accident|Bannerghata Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "road_conditions|ORR East 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|ORR West 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "pot_holes|Tumkur Road": {
+        "n": 2,
+        "median": 2352.4,
+        "mean": 2352.4,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2352.4,
+        "n_false": 2
+      },
+      "tree_fall|CBD 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "construction|Airport New South Road": {
+        "n": 6,
+        "median": 391.9,
+        "mean": 689.4,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 391.9,
+        "n_false": 6
+      },
+      "accident|Hennur Main Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "accident|CBD 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|Magadi Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "road_conditions|Airport New South Road": {
+        "n": 2,
+        "median": 644.5,
+        "mean": 644.5,
+        "closure_true_median": 875.4,
+        "n_true": 1,
+        "closure_false_median": 413.5,
+        "n_false": 1
+      },
+      "construction|Bannerghata Road": {
+        "n": 2,
+        "median": 219.2,
+        "mean": 219.2,
+        "closure_true_median": 426.6,
+        "n_true": 1,
+        "closure_false_median": 11.8,
+        "n_false": 1
+      },
+      "pot_holes|ORR East 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "others|Airport New South Road": {
+        "n": 1,
+        "median": 16.6,
+        "mean": 16.6,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 16.6,
+        "n_false": 1
+      },
+      "public_event|West of Chord Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "road_conditions|ORR North 1": {
+        "n": 1,
+        "median": 1389.0,
+        "mean": 1389.0,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 1389.0,
+        "n_false": 1
+      },
+      "public_event|ORR North 1": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "road_conditions|Varthur Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "tree_fall|Hennur Main Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "construction|Magadi Road": {
+        "n": 1,
+        "median": 3603.1,
+        "mean": 3603.1,
+        "closure_true_median": 3603.1,
+        "n_true": 1,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|Bannerghata Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|Bellary Road 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "public_event|Hosur Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "procession|Bellary Road 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "road_conditions|ORR North 2": {
+        "n": 1,
+        "median": 2434.7,
+        "mean": 2434.7,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 2434.7,
+        "n_false": 1
+      },
+      "congestion|West of Chord Road": {
+        "n": 1,
+        "median": 65.5,
+        "mean": 65.5,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 65.5,
+        "n_false": 1
+      },
+      "protest|Mysore Road": {
+        "n": 2,
+        "median": 33.9,
+        "mean": 33.9,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": 33.9,
+        "n_false": 2
+      },
+      "procession|West of Chord Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "procession|Airport New South Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "protest|Old Airport Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "protest|CBD 2": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "construction|Hosur Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      },
+      "road_conditions|Old Madras Road": {
+        "n": 0,
+        "median": null,
+        "mean": null,
+        "closure_true_median": null,
+        "n_true": 0,
+        "closure_false_median": null,
+        "n_false": 0
+      }
+    }
+  }
+}

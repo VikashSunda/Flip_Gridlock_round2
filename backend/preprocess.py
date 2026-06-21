@@ -8,8 +8,9 @@ import csv
 import json
 import math
 import os
+import statistics
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from datetime import datetime
 
 # Paths
@@ -22,6 +23,19 @@ CSV_PATH = os.path.join(
 DATA_DIR = os.path.join(SCRIPT_DIR, "data")
 
 os.makedirs(DATA_DIR, exist_ok=True)
+
+# --- Theme-2 modelling constants ---
+# `gathering`/supertype grouping lives in feature_utils so the engine uses the
+# exact same definitions (B6: procession=38, protest=8 etc. are individually too
+# sparse and get pooled).
+from feature_utils import supertype_of
+
+# scheduled_duration is the start->end_datetime window for PLANNED events. It is
+# a permit/schedule window (B2: 41% of values are out of range, many land exactly
+# on the hour), NOT observed clearance — so we clean it and use it only as an
+# INPUT feature, never as the prediction target.
+MIN_SCHEDULED_MINS = 15
+MAX_SCHEDULED_MINS = 24 * 60
 
 
 def haversine_km(lat1, lon1, lat2, lon2):
@@ -62,42 +76,11 @@ def parse_datetime(dt_str):
 
 
 def compute_severity_score(row):
-    """
-    Derive a 1-10 severity score from event attributes.
-    This is our 'causal weight' for the spatial engine.
-    """
-    score = 5  # baseline
-
-    # Event cause weights
-    cause_weights = {
-        "accident": 3,
-        "tree_fall": 2,
-        "water_logging": 2,
-        "vip_movement": 2,
-        "procession": 2,
-        "protest": 3,
-        "public_event": 1,
-        "congestion": 1,
-        "construction": 1,
-        "vehicle_breakdown": 0,
-        "pot_holes": 0,
-        "road_conditions": 0,
-        "others": 0,
-        "Debris": 1,
-        "test_demo": -5,
-    }
-    score += cause_weights.get(row["event_cause"], 0)
-
-    # Priority
-    if row["priority"] == "High":
-        score += 1
-
-    # Road closure required
-    if row["requires_road_closure"] == "TRUE":
-        score += 2
-
-    # Clamp to 1-10
-    return max(1, min(10, score))
+    """Derive a 1-10 severity prior from event attributes (shared with forecast path)."""
+    from feature_utils import estimate_severity
+    return estimate_severity(
+        row["event_cause"], row["priority"], row["requires_road_closure"] == "TRUE"
+    )
 
 
 def compute_clearance_time(row):
@@ -113,6 +96,23 @@ def compute_clearance_time(row):
         diff_mins = (end - start).total_seconds() / 60
         if 0 < diff_mins < 10000:  # Filter out garbage
             return round(diff_mins, 1)
+    return None
+
+
+def compute_scheduled_duration(row):
+    """
+    Cleaned start->end_datetime window in minutes (INPUT feature, planned events).
+
+    Returns None when the window is missing or out of the sane [15min, 24h] band.
+    See B2: ~41% of raw planned windows are garbage (0/1-min noise, multi-day
+    permits, 3.9-year outliers), so this is deliberately conservative.
+    """
+    start = parse_datetime(row["start_datetime"])
+    end = parse_datetime(row["end_datetime"])
+    if start and end and end > start:
+        mins = (end - start).total_seconds() / 60
+        if MIN_SCHEDULED_MINS <= mins <= MAX_SCHEDULED_MINS:
+            return round(mins, 1)
     return None
 
 
@@ -132,6 +132,10 @@ def process_events(rows):
 
         clearance = compute_clearance_time(row)
         severity = compute_severity_score(row)
+        scheduled_duration = compute_scheduled_duration(row)
+
+        def _clean(value):
+            return value if value and value != "NULL" else ""
 
         event = {
             "id": row["id"],
@@ -140,8 +144,10 @@ def process_events(rows):
             "longitude": lon,
             "address": row["address"].strip('"') if row["address"] else "",
             "event_cause": row["event_cause"],
+            "supertype": supertype_of(row["event_cause"]),
             "requires_road_closure": row["requires_road_closure"] == "TRUE",
             "start_datetime": row["start_datetime"],
+            "end_datetime": _clean(row.get("end_datetime")),  # restored (B2: planned schedule window)
             "status": row["status"],
             "description": row["description"].strip('"') if row["description"] else "",
             "veh_type": row.get("veh_type", ""),
@@ -150,8 +156,11 @@ def process_events(rows):
             "police_station": row.get("police_station", ""),
             "zone": row.get("zone", ""),
             "junction": row.get("junction", ""),
+            "route_path": _clean(row.get("route_path")),  # restored (enrichment, ~20% planned)
             "severity_score": severity,
-            "clearance_time_mins": clearance,
+            "clearance_time_mins": clearance,  # OUTPUT: observed, from resolved/closed
+            # INPUT feature: cleaned schedule window (None when missing/garbage)
+            "scheduled_duration_mins": scheduled_duration,
             "comment": row.get("comment", ""),
         }
         events.append(event)
@@ -257,6 +266,19 @@ def build_corridor_stats(events):
                 event["clearance_time_mins"]
             )
 
+    # load_tier: quartile rank of event_count, used as the corridor-load term
+    # in the manpower heuristic (Fix 6).
+    counts = sorted(d["event_count"] for d in corridor_data.values())
+    q1 = counts[len(counts) // 4] if counts else 0
+    q3 = counts[(3 * len(counts)) // 4] if counts else 0
+
+    def _tier(n):
+        if n >= q3:
+            return "high"
+        if n <= q1:
+            return "low"
+        return "medium"
+
     stats = {}
     for corr, data in corridor_data.items():
         ct = sorted(data["clearance_times"])
@@ -264,6 +286,7 @@ def build_corridor_stats(events):
             "event_count": data["event_count"],
             "avg_severity": round(data["severity_sum"] / data["event_count"], 1),
             "median_clearance_mins": ct[len(ct) // 2] if ct else None,
+            "load_tier": _tier(data["event_count"]),
             "top_causes": dict(
                 sorted(data["causes"].items(), key=lambda x: -x[1])[:5]
             ),
@@ -272,7 +295,111 @@ def build_corridor_stats(events):
     return stats
 
 
+def _clearance_stats(subset):
+    """Clearance summary for a subset, split by road-closure (Fix 7 quasi-experiment).
+
+    Uses median (robust to the long right tail). closure_true vs closure_false is
+    a CONFOUNDED comparison (closures happen on worse events) — surfaced with n
+    so the engine/UI can show confidence and caveat it.
+    """
+    cl = [e["clearance_time_mins"] for e in subset if e.get("clearance_time_mins")]
+    t = [e["clearance_time_mins"] for e in subset
+         if e.get("clearance_time_mins") and e["requires_road_closure"]]
+    f = [e["clearance_time_mins"] for e in subset
+         if e.get("clearance_time_mins") and not e["requires_road_closure"]]
+    return {
+        "n": len(cl),
+        "median": round(statistics.median(cl), 1) if cl else None,
+        "mean": round(statistics.mean(cl), 1) if cl else None,
+        "closure_true_median": round(statistics.median(t), 1) if t else None,
+        "n_true": len(t),
+        "closure_false_median": round(statistics.median(f), 1) if f else None,
+        "n_false": len(f),
+    }
+
+
+def build_forecast_priors(events):
+    """
+    Forecast priors consumed by the spatial engine (Fixes 4 and 7).
+
+    - hourly_weights: event volume per UTC hour, normalized to mean 1.0. Derived
+      empirically so it is independent of the UTC/local timezone-label ambiguity.
+    - clearance_priors: clearance summaries at four backoff tiers
+      (by_cause_corridor -> by_cause -> by_supertype -> global). The engine walks
+      from specific to general until it finds a tier with enough samples.
+    """
+    # Hourly volume weights
+    hour_counts = defaultdict(int)
+    for e in events:
+        dt = parse_datetime(e["start_datetime"])
+        if dt:
+            hour_counts[dt.hour] += 1
+    total = sum(hour_counts.values())
+    mean_per_hour = total / 24 if total else 1
+    hourly_weights = {
+        str(h): round(hour_counts.get(h, 0) / mean_per_hour, 3) for h in range(24)
+    }
+
+    by_cause = defaultdict(list)
+    by_supertype = defaultdict(list)
+    by_cause_corridor = defaultdict(list)
+    for e in events:
+        by_cause[e["event_cause"]].append(e)
+        by_supertype[e["supertype"]].append(e)
+        if e["corridor"] and e["corridor"] != "Non-corridor":
+            by_cause_corridor[f"{e['event_cause']}|{e['corridor']}"].append(e)
+
+    return {
+        "meta": {
+            "hourly_weights_basis": "event volume per UTC hour, normalized to mean 1.0",
+            "timezone_note": "start_datetime is +00 (UTC); weights are empirical so label-agnostic",
+            "clearance_caveat": "closure_true vs closure_false is confounded; n provided for confidence",
+        },
+        "hourly_weights": hourly_weights,
+        "clearance_priors": {
+            "global": _clearance_stats(events),
+            "by_cause": {k: _clearance_stats(v) for k, v in by_cause.items()},
+            "by_supertype": {k: _clearance_stats(v) for k, v in by_supertype.items()},
+            "by_cause_corridor": {k: _clearance_stats(v) for k, v in by_cause_corridor.items()},
+        },
+    }
+
+
+def build_junction_stats(events):
+    """
+    Per-junction historical stats, precomputed once (B8 performance fix).
+
+    The spatial engine previously scanned all ~8k events inside its BFS loop;
+    this dict turns that into an O(1) lookup per junction.
+    """
+    by_junction = defaultdict(list)
+    for e in events:
+        j = e.get("junction")
+        if j and j != "NULL" and j.strip():
+            by_junction[j].append(e)
+
+    stats = {}
+    for junc, evs in by_junction.items():
+        ct = [e["clearance_time_mins"] for e in evs if e.get("clearance_time_mins")]
+        causes = Counter(e["event_cause"] for e in evs)
+        corridors = Counter(
+            e["corridor"] for e in evs if e["corridor"] and e["corridor"] != "Non-corridor"
+        )
+        stats[junc] = {
+            "event_count": len(evs),
+            "avg_clearance_mins": round(statistics.mean(ct), 1) if ct else None,
+            "top_causes": dict(causes.most_common(3)),
+            "corridor": corridors.most_common(1)[0][0] if corridors else None,
+        }
+    return stats
+
+
 def main():
+    # Windows consoles default to cp1252; keep non-ASCII output from crashing.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
     print("=" * 60)
     print("ASTraM Nexus — Data Preprocessing Pipeline")
     print("=" * 60)
@@ -310,24 +437,42 @@ def main():
     )
 
     # Build corridor stats
-    print("\n[4/5] Computing corridor statistics...")
+    print("\n[4/6] Computing corridor statistics...")
     corridor_stats = build_corridor_stats(events)
     print(f"  Corridors analyzed: {len(corridor_stats)}")
 
+    # Build forecast priors + junction stats (Theme-2 additions)
+    print("\n[5/6] Building forecast priors and junction stats...")
+    forecast_priors = build_forecast_priors(events)
+    junction_stats = build_junction_stats(events)
+    gp = forecast_priors["clearance_priors"]["global"]
+    print(f"  Forecast priors: global clearance n={gp['n']} median={gp['median']}min "
+          f"(closure_true median={gp['closure_true_median']} n={gp['n_true']} | "
+          f"closure_false median={gp['closure_false_median']} n={gp['n_false']})")
+    print(f"  Junction stats: {len(junction_stats)} junctions")
+
     # Save outputs
-    print("\n[5/5] Saving processed data...")
+    print("\n[6/6] Saving processed data...")
 
     with open(os.path.join(DATA_DIR, "events.json"), "w", encoding="utf-8") as f:
         json.dump(events, f, ensure_ascii=False, indent=2)
-    print(f"  → data/events.json ({len(events)} events)")
+    print(f"  -> data/events.json ({len(events)} events)")
 
     with open(os.path.join(DATA_DIR, "junction_graph.json"), "w", encoding="utf-8") as f:
         json.dump(junction_graph, f, ensure_ascii=False, indent=2)
-    print(f"  → data/junction_graph.json")
+    print(f"  -> data/junction_graph.json")
 
     with open(os.path.join(DATA_DIR, "corridor_stats.json"), "w", encoding="utf-8") as f:
         json.dump(corridor_stats, f, ensure_ascii=False, indent=2)
-    print(f"  → data/corridor_stats.json")
+    print(f"  -> data/corridor_stats.json")
+
+    with open(os.path.join(DATA_DIR, "forecast_priors.json"), "w", encoding="utf-8") as f:
+        json.dump(forecast_priors, f, ensure_ascii=False, indent=2)
+    print(f"  -> data/forecast_priors.json")
+
+    with open(os.path.join(DATA_DIR, "junction_stats.json"), "w", encoding="utf-8") as f:
+        json.dump(junction_stats, f, ensure_ascii=False, indent=2)
+    print(f"  -> data/junction_stats.json")
 
     # Summary
     print("\n" + "=" * 60)
