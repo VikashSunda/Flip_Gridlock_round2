@@ -101,7 +101,7 @@ npm run dev
 ```
 
 Open **http://localhost:5173**. The UI expects the API at `http://localhost:8000` (override with `VITE_API_BASE`).
-#### demo link - flip-gridlock-round2.vercel.app
+####demo link: https://flip-gridlock-round2.vercel.app/
 ## API
 
 | Method | Endpoint | Purpose |
