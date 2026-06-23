@@ -378,7 +378,7 @@ export default function AnalyticsPanel({ events, causeColors }) {
               </div>
             ))}
           </div>
-          <p className="muted">Darker = more incidents. Hours are UTC (+00); shift +5:30 for IST. Reads as staffing windows.</p>
+          <p className="muted">Brighter = more incidents. Hours are local IST. Reads as staffing windows.</p>
         </div>
       </div>
 

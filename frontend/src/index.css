@@ -284,6 +284,7 @@ button {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  flex-shrink: 0;
   box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
@@ -1485,8 +1486,9 @@ button {
   font-size: 13px;
 }
 
-.right-rail > section,
-.left-rail > section,
+/* Entry animation kept only for the forecast results (which appear on demand).
+   The persistent live-tab rail panels are NOT animated: a re-render mid-fade
+   could leave them stuck at the keyframe's opacity:0 start state (top-left glitch). */
 .forecast-results > * {
   animation: fade-rise 0.42s ease both;
 }
